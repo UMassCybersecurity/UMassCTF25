@@ -46,17 +46,20 @@ jobs:
       #     image_name: ${{github.head_ref}}
 
       - name: Authenticate with GCP
+        id: gcp-auth
         uses: 'google-github-actions/auth@v2'
         with:
+          token_format: 'access_token'
           workload_identity_provider: ${{ secrets.workload_identity_provider_id }}
           project_id:  ${{ secrets.project_id }}
+          service_account: ${{ secrets.ar_push_service_account }}
       - name: Docker Auth
         if: steps.check_dockerfile.outputs.files_exists == 'true'
         id: docker-auth
         uses: 'docker/login-action@v1'
         with:
           username: 'oauth2accesstoken'
-          password: ${{ steps.auth.outputs.access_token }}
+          password: ${{ steps.gcp-auth.outputs.access_token }}
           registry: ${{ secrets.registry_hostname }}
       - name: Build and Push Container
         if: steps.check_dockerfile.outputs.files_exists == 'true'
@@ -75,5 +78,8 @@ jobs:
         with:
           path: 'challenges/${{github.head_ref}}/static'
           destination: '${{secrets.static_assets_bucket_name}}/challenges/${{github.head_ref}}/static' #TODO check if this is correct
-      # - name: Update CTFd
-        
+  # Update-CTFd:
+  #   runs-on: ubuntu-latest
+  #   container: 
+  #     image: omzz15/ctfduploader:0.1
+  #     env:
