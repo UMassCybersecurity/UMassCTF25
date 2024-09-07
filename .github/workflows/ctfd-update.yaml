@@ -2,10 +2,13 @@ name: CTFD Update
 on:
   push:
     paths:
-      - ctfd/**
+      - CTFd/**
 jobs:
   Update-CTFD:
     runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
     steps:
       - uses: actions/checkout@v4.1.7
       - name: Authenticate with GCP

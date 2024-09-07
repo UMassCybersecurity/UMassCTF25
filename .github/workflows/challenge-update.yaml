@@ -75,3 +75,5 @@ jobs:
         with:
           path: 'challenges/${{github.head_ref}}/static'
           destination: '${{secrets.static_assets_bucket_name}}/challenges/${{github.head_ref}}/static' #TODO check if this is correct
+      # - name: Update CTFd
+        
