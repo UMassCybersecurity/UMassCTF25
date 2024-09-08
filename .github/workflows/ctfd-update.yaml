@@ -36,9 +36,7 @@ jobs:
         with:
           from-file: config/ctfd-cr.yaml
           to-file: config/ctfd-cr.yaml
-          merge:
-            spec.template.spec.containers:
-              - image: "gcr.io/${{ secrets.registry_hostname }}/${{ secrets.project_id }}/${{ secrets.registry_name }}/ctfd:${{ github.sha }}"
+          merge: { 'spec.template.spec.containers': [ 'image': "gcr.io/${{ secrets.registry_hostname }}/${{ secrets.project_id }}/${{ secrets.registry_name }}/ctfd:${{ github.sha }}" ] }
       - name: Test YAML
         run: cat confit/ctfd-cr.yaml
       - name: Update Cloud Run
