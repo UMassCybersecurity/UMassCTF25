@@ -25,25 +25,24 @@ jobs:
         uses: andstor/file-existence-action@v3.0.0
         with:
           files: "challenges/${{ github.head_ref }}/static" 
-
-      # - name: Build and Upload Challenge
-      #   if: steps.check_dockerfile.outputs.files_exists == 'true'
-      #   uses: piotr-krusinski/action-google-artifact-registry@v1.0
-      #   with:
-      #     # Google project ID of your project where Artifact Registry is created
-      #     google_project_id: ${{ secrets.project_id }}
-      #     # Google Artifact Registry region
-      #     google_artifact_registry_region: ""
-      #     # Google Artifact Registry hostname
-      #     google_artifact_registry_hostname: ${{ secrets.registry_hostname }}
-      #     # Google Artifact Registry repository name
-      #     google_artifact_registry_name: ${{ secrets.registry_name }}
-      #     # Base64 version of Google Cloud Platform service key to access Artifact Registry
-      #     service_account_key: ${{ secrets.ar_push_sa_account_key }}
-      #     # Path to dockerfile
-      #     dockerfile: "challenges/${{github.head_ref}}/Dockerfile"
-      #     # Name of created image
-      #     image_name: ${{github.head_ref}}
+      - name: Build and Upload Challenge
+         if: steps.check_dockerfile.outputs.files_exists == 'true'
+         uses: piotr-krusinski/action-google-artifact-registry@v1.0
+         with:
+           # Google project ID of your project where Artifact Registry is created
+           google_project_id: ${{ secrets.project_id }}
+           # Google Artifact Registry region
+           google_artifact_registry_region: ""
+           # Google Artifact Registry hostname
+           google_artifact_registry_hostname: ${{ secrets.registry_hostname }}
+           # Google Artifact Registry repository name
+           google_artifact_registry_name: ${{ secrets.registry_name }}
+           # Base64 version of Google Cloud Platform service key to access Artifact Registry
+           service_account_key: ${{ secrets.ar_push_sa_account_key }}
+           # Path to dockerfile
+           dockerfile: "challenges/${{github.head_ref}}/Dockerfile"
+           # Name of created image
+           image_name: ${{github.head_ref}}
 
       - name: Authenticate with GCP
         id: gcp-auth
