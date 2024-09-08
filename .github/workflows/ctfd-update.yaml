@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - CTFd/**
+      - config/ctfd-cr.yaml
 jobs:
   Update-CTFD:
     runs-on: ubuntu-latest
@@ -28,10 +29,19 @@ jobs:
           registry: ${{ secrets.registry_hostname }}
       - name: Build and Push Container
         run: |-
-          docker build -t "${{ secrets.registry_hostname }}/${{ secrets.project_id }}/${{ secrets.registry_name }}/ctfd:${{ github.sha }}"              
+          docker build -t "${{ secrets.registry_hostname }}/${{ secrets.project_id }}/${{ secrets.registry_name }}/ctfd:${{ github.sha }}" CTFd
           docker push "${{ secrets.registry_hostname }}/${{ secrets.project_id }}/${{ secrets.registry_name }}/ctfd:${{ github.sha }}"
+      - name: Modify CTFd Cloud Run YAML
+        uses: teunmooij/yaml@v1
+        with:
+          from-file: config/ctfd-cr.yaml
+          to-file: config/ctfd-cr.yaml
+          merge:
+            spec.template.spec.containers:
+              - image: "gcr.io/${{ secrets.registry_hostname }}/${{ secrets.project_id }}/${{ secrets.registry_name }}/ctfd:${{ github.sha }}"
+      - name: Test YAML
+        run: cat confit/ctfd-cr.yaml
       - name: Update Cloud Run
         uses: 'google-github-actions/deploy-cloudrun@v2'
         with:
-          service: 'ctfd'
-          image: "gcr.io/${{ secrets.registry_hostname }}/${{ secrets.project_id }}/${{ secrets.registry_name }}/ctfd:${{ github.sha }}"
+          metadata: config/ctfd-cr.yaml
