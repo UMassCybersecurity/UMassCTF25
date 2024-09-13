@@ -37,6 +37,7 @@ jobs:
            docker build -t "${{ vars.registry_hostname }}/${{ vars.project_id }}/${{ vars.registry_name }}/ctfd:latest" CTFd
            docker push "${{ vars.registry_hostname }}/${{ vars.project_id }}/${{ vars.registry_name }}/ctfd:latest"
       - name: Update Cloud Run 
+        id: update_cloud_run
         run: |-
           gcloud run deploy ctfd \
           --region=us-central1 \
@@ -52,7 +53,9 @@ jobs:
           --member allUsers \
           --region ${{ vars.region }}
       - name: 'Update DNS'
-        run: |-          
+        run: |-
+          hostname="$(echo ${{ steps.update_cloud_run.outputs.url }} | sed -e 's/[^/]*\/\/\([^@]*@\)\?\([^:/]*\).*/\2/')."
+          
           gcloud dns record-sets create "ctfd.${{ vars.dns_base_name }}" \
           --rrdatas="$hostname" \
           --type=CNAME --ttl=60 \
