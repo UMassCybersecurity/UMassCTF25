@@ -1,5 +1,5 @@
 # CTF Template Repository 
-
+TODOv2: add naming regexfor cloudrun
 <!-- TODO make better -->
 
 ## For Challenge Authors 
