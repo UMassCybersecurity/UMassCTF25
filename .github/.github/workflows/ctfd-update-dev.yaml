@@ -1,0 +1,64 @@
+name: CTFD Update
+on:
+  push:
+    paths:
+      - CTFd/**
+      - config/ctfd-cr.yaml
+    branches:
+      - dev
+jobs:
+  Update-CTFD:
+    environment: dev
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:
+      - uses: actions/checkout@v4.1.7
+      - name: Authenticate with GCP
+        id: gcp-auth
+        uses: 'google-github-actions/auth@v2'
+        with:
+          token_format: 'access_token'
+          workload_identity_provider: ${{ vars.workload_identity_provider_id }}
+          project_id:  ${{ vars.project_id }}
+          service_account: ${{ vars.ar_push_service_account }}
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v2'
+      - name: Docker Auth
+        id: docker-auth
+        uses: 'docker/login-action@v1'
+        with:
+          username: 'oauth2accesstoken'
+          password: ${{ steps.gcp-auth.outputs.access_token }}
+          registry: ${{ vars.registry_hostname }}
+      - name: Build and Push Container
+        run: |-
+           docker build -t "${{ vars.registry_hostname }}/${{ vars.project_id }}/${{ vars.registry_name }}/ctfd:latest" CTFd
+           docker push "${{ vars.registry_hostname }}/${{ vars.project_id }}/${{ vars.registry_name }}/ctfd:latest"
+      - name: Update Cloud Run 
+        run: |-
+          gcloud run deploy ctfd \
+          --region=us-central1 \
+          --image="${{ vars.registry_hostname }}/${{ vars.project_id }}/${{ vars.registry_name }}/ctfd:latest" \
+          --port=8000 \
+          --network=${{ vars.ctfd_network }} \
+          --subnet=${{ vars.ctfd_subnet }}
+      # TODOv2 remove?
+      - name: Allow Unauthenticated Connections to CTFd
+        run: |- 
+          gcloud run services add-iam-policy-binding ctfd \
+          --role roles/run.invoker \
+          --member allUsers \
+          --region ${{ vars.region }}
+      - name: 'Update DNS'
+        run: |-          
+          gcloud dns record-sets create "ctfd.${{ vars.dns_base_name }}" \
+          --rrdatas="$hostname" \
+          --type=CNAME --ttl=60 \
+          --zone=${{ vars.dns_zone }} \
+          || \
+          gcloud dns record-sets update "ctfd.${{ vars.dns_base_name }}" \
+          --rrdatas="$hostname" \
+          --type=CNAME --ttl=60 \
+          --zone=${{ vars.dns_zone }}

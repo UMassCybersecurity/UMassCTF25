@@ -1,0 +1,152 @@
+on:
+  workflow_call:
+    inputs:
+      chall-path:
+        required: true
+        type: string
+      workload-identity-provider-id:
+        required: true
+        type: string
+      project-id:
+        required: true
+        type: string
+      ar-push-service-account:
+        required: true
+        type: string
+      registry-hostname:
+        required: true
+        type: string
+      registry-name:
+        required: true
+        type: string
+      challs-vm-name:
+        required: true
+        type: string
+      challs-vm-zone:
+        required: true
+        type: string
+      challs-vm-ip:
+        required: true
+        type: string
+      dns-base-name:
+        required: true
+        type: string
+      dns-zone:
+        required: true
+        type: string
+      static-assets-bucket-name:
+        required: true
+        type: string
+      ctfd-region:
+        required: true
+        type: string
+    secrets:
+      ctfd-token:
+        required: true
+jobs:
+  Deplay-Challenge:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:
+      # Basic setup
+      - uses: actions/checkout@v4.1.7
+      - run: |-
+          path=${{ inputs.chall-path }}
+          tokens=(${branch//'/'/ })
+          
+          echo "category=${tokens[0]}" >> $GITHUB_ENV
+          echo "challenge=${tokens[1]}" >> $GITHUB_ENV
+          
+      # Check for files
+      - name: Check for Dockerfile
+        id: check_dockerfile
+        uses: andstor/file-existence-action@v3.0.0
+        with:
+          files: "challenges/${{ inputs.chall-path }}/Dockerfile"
+      - name: Check for Static Folder
+        id: check_static
+        uses: andstor/file-existence-action@v3.0.0
+        with:
+          files: "challenges/${{ inputs.chall-path }}/static" 
+      # Authentication
+      - name: Authenticate with GCP
+        id: gcp-auth
+        uses: 'google-github-actions/auth@v2'
+        with:
+          token_format: 'access_token'
+          workload_identity_provider: ${{ inputs.workload-identity-provider-id }}
+          project_id:  ${{ inputs.project-id }}
+          service_account: ${{ inputs.ar-push-service-account }}
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v2'
+      - name: Docker Auth
+        if: steps.check_dockerfile.outputs.files_exists == 'true'
+        id: docker-auth
+        uses: 'docker/login-action@v1'
+        with:
+          username: 'oauth2accesstoken'
+          password: ${{ steps.gcp-auth.outputs.access_token }}
+          registry: ${{ inputs.registry-hostname }}
+      # Updating...
+      - name: 'Build and Push Container'
+        if: steps.check_dockerfile.outputs.files_exists == 'true'
+        run: |-
+          image="${{ inputs.registry-hostname }}/${{ inputs.project-id }}/${{ inputs.registry-name }}/${{ inputs.chall-path }}:latest"
+          docker build -t $image "challenges/${{ inputs.chall-path }}"
+          docker push $image
+          echo "image=$image" >> $GITHUB_ENV
+      # For web
+      - name: 'Web: Update Cloud Run'
+        id: update_cloud_run
+        if: steps.check_dockerfile.outputs.files_exists == 'true' && env.category == 'web'
+        uses: 'google-github-actions/deploy-cloudrun@v2'
+        with:
+          service: '${{ env.challenge }}'
+          image: ${{ env.image }}
+      # For other
+      - name: 'Other: Update VM'
+        if: steps.check_dockerfile.outputs.files_exists == 'true' && env.category != 'web'
+        run: |-
+          PORT_STR=""
+          source "challenges/${{ inputs.chall-path }}/config.env"
+          for port in ${PORTS[@]};
+          do
+            PORT_STR="$PORT_STR -p $port:$port"
+          done;
+          # TODO unsudo and remove echo
+          echo $PORT_STR
+          gcloud auth configure-docker us-central1-docker.pkg.dev
+          gcloud compute ssh ${{ inputs.challs-vm-name }} --zone=${{ inputs.challs-vm-zone }} --command="sudo docker run -d $PORT_STR ${{ env.image }}"
+      # For both
+      - name: 'Update DNS'
+        if: steps.check_dockerfile.outputs.files_exists == 'true'
+        run: |-
+          if [ ${{ env.category }} == 'web' ]; then
+            hostname="$(echo ${{ steps.update_cloud_run.outputs.url }} | sed -e 's/[^/]*\/\/\([^@]*@\)\?\([^:/]*\).*/\2/')."
+            type='CNAME'
+          else
+            hostname=${{ inputs.challs-vm-ip }}
+            type='A'
+          fi
+          
+          gcloud dns record-sets create "${{ env.challenge }}.${{ inputs.dns-base-name }}" \
+          --rrdatas="$hostname" \
+          --type=$type --ttl=60 \
+          --zone=${{ inputs.dns-zone }} \
+          || \
+          gcloud dns record-sets update "${{ env.challenge }}.${{ inputs.dns-base-name }}" \
+          --rrdatas="$hostname" \
+          --type=$type --ttl=60 \
+          --zone=${{ inputs.dns-zone }} \
+      - name: Upload Static Files
+        if: steps.check_static.outputs.files_exists == 'true'
+        uses: google-github-actions/upload-cloud-storage@v2
+        with:
+          path: 'challenges/${{github.head_ref}}/static'
+          destination: '${{ inputs.static-assets-bucket-name }}/${{ inputs.chall-path }}'
+      - name: Update CTFd
+        run: |-
+          ctfd_url="$(gcloud run services describe ctfd --region ${{ inputs.ctfd-region }} --format 'value(status.url)')"
+          ./scripts/ctfduploader $ctfd_url "${{ secrets.ctfd-token }}" "${{ inputs.static-assets-bucket-name }}" "challenges" "defaults.yaml"
