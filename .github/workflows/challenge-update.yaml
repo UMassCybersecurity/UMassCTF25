@@ -3,10 +3,9 @@ on:
   pull_request:
     types: [closed]
     branches:
-      - dev           
+      - main 
 jobs:
   Update-Challenge:
-    environment: dev
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged == true
     permissions:
@@ -65,14 +64,6 @@ jobs:
           docker build -t $image "challenges/${{github.head_ref}}"
           docker push $image
           echo "image=$image" >> $GITHUB_ENV
-      # For web
-      - name: 'Web: Update Cloud Run'
-        id: update_cloud_run
-        if: steps.check_dockerfile.outputs.files_exists == 'true' && env.category == 'web'
-        uses: 'google-github-actions/deploy-cloudrun@v2'
-        with:
-          service: '${{ env.challenge }}'
-          image: ${{ env.image }}
       # For other
       - name: 'Other: Update VM'
         if: steps.check_dockerfile.outputs.files_exists == 'true' && env.category != 'web'
