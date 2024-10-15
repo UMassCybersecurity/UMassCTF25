@@ -7,5 +7,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4.1.7
-      - name: test 
-        run: echo ${{ vars.WEB_VM }}
+      - run: |-
+          branch=${{github.head_ref}}
+          tokens=(${branch//'/'/ })
+          
+          echo "category=${tokens[0]}" >> $GITHUB_ENV
+          echo "challenge=${tokens[1]}" >> $GITHUB_ENV
+      - name: test does not exist 
+        run: |-
+          if [ ${{env.category}} == 'web' && -z ${{ vars.WEB_VM_ZONE }} ]; then 
+            echo "bad"
+          else 
+            echo "good"
+      - name: test exists
+        run: |-
+          if [ ${{env.category}} == 'web' && -z ${{ vars.test }} ]; then 
+            echo "bad"
+          else 
+            echo "good"
+
