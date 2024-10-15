@@ -1,0 +1,11 @@
+name: test 
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+jobs:
+  test-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.1.7
+      - name: test 
+        run: echo "hello" 

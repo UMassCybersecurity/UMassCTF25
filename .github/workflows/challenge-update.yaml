@@ -51,7 +51,7 @@ jobs:
       - name: Select VM
         if: steps.check_dockercompose.outputs.files_exists == 'true' || steps.check_dockerfile.outputs.files_exists == 'true'
         run: |-
-          if [ ${{ env.category }} == 'web' ]; then
+          if [ ${{ env.category }} == 'web' && ${{ vars.WEB_VM_NAME }} != '']; then
             vm_zone=${{ vars.WEB_VM_ZONE }}
             vm_name=${{ vars.WEB_VM_NAME }}
           else
@@ -61,6 +61,8 @@ jobs:
           
           echo "vm_zone=$vm_zone" >> $GITHUB_ENV
           echo "vm_name=$vm_name" >> $GITHUB_ENV
+      
+
       # For docker-compose
       - name: Update Dockercompose
         if: steps.check_dockercompose.outputs.files_exists == 'true'
