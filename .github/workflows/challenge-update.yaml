@@ -51,7 +51,7 @@ jobs:
       - name: Select VM
         if: steps.check_dockercompose.outputs.files_exists == 'true' || steps.check_dockerfile.outputs.files_exists == 'true'
         run: |-
-          if [ ${{ env.category }} == 'web' && ${{ vars.WEB_VM_NAME }} != '']; then
+          if [ ${{ env.category }} == 'web' && -z ${{ vars.WEB_VM_ZONE }}]; then
             vm_zone=${{ vars.WEB_VM_ZONE }}
             vm_name=${{ vars.WEB_VM_NAME }}
           else

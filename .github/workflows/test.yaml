@@ -8,4 +8,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4.1.7
       - name: test 
-        run: echo "hello" 
+        run: echo ${{ vars.WEB_VM }}
