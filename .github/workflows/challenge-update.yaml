@@ -43,9 +43,9 @@ jobs:
         uses: 'google-github-actions/auth@v2'
         with:
           token_format: 'access_token'
-          workload_identity_provider: ${{ vars.workload_identity_provider_id }}
+          workload_identity_provider: ${{ vars.workload_identity_provider_name}}
           project_id:  ${{ vars.project_id }}
-          service_account: ${{ vars.ar_push_service_account }}
+          service_account: ${{ vars.workload_identity_provider_sa_name }}
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v2'
       - name: Docker Auth
@@ -55,12 +55,12 @@ jobs:
         with:
           username: 'oauth2accesstoken'
           password: ${{ steps.gcp-auth.outputs.access_token }}
-          registry: ${{ vars.registry_hostname }}
+          registry: ${{ vars.docker_repo_hostname }}
       # Updating...
       - name: 'Build and Push Container'
         if: steps.check_dockerfile.outputs.files_exists == 'true'
         run: |-
-          image="${{ vars.registry_hostname }}/${{ vars.project_id }}/${{ vars.registry_name }}/${{github.head_ref}}:latest"
+          image="${{ vars.docker_repo_hostname}}/${{ vars.project_id }}/${{ vars.docker_repo_name}}/${{github.head_ref}}:latest"
           docker build -t $image "challenges/${{github.head_ref}}"
           docker push $image
           echo "image=$image" >> $GITHUB_ENV
