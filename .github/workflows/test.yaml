@@ -19,10 +19,11 @@ jobs:
             echo "bad"
           else 
             echo "good"
+          fi 
       - name: test exists
         run: |-
           if [ ${{env.category}} == 'web' && -z ${{ vars.test }} ]; then 
             echo "bad"
           else 
             echo "good"
-
+          fi
