@@ -15,7 +15,7 @@ jobs:
           echo "challenge=${tokens[1]}" >> $GITHUB_ENV
       - name: test 
         run: |-
-          if [ -z "$a" ]
+          if [ -z ${{ vars.test }} ]
           then
             echo "not defined"
           else 
