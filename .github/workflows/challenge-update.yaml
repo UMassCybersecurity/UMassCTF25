@@ -52,20 +52,15 @@ jobs:
         if: steps.check_dockercompose.outputs.files_exists == 'true' || steps.check_dockerfile.outputs.files_exists == 'true'
         run: |-
           if [ ${{ env.category }} == 'web' ] && [ ! -z ${{ vars.WEB_VM_NAME }} ]; then
-            vm_zone=${{ vars.WEB_VM_ZONE }}
             vm_name=${{ vars.WEB_VM_NAME }}
           elif [ ${{ env.category }} == 'pwn' ] && [ ! -z ${{ vars.PWN_VM_NAME }} ]; then
-            vm_zone=${{ vars.PWN_VM_ZONE }}
             vm_name=${{ vars.PWN_VM_NAME }}
           elif [ ${{ env.category }} == 'misc' ] && [ ! -z ${{ vars.MISC_VM_NAME }} ]; then
-            vm_zone=${{ vars.MISC_VM_ZONE }}
             vm_name=${{ vars.MISC_VM_NAME }}
           else
-            vm_zone=${{ vars.MIXED_CHALLS_VM_ZONE }}
             vm_name=${{ vars.MIXED_CHALLS_VM_NAME }}
           fi
           
-          echo "vm_zone=$vm_zone" >> $GITHUB_ENV
           echo "vm_name=$vm_name" >> $GITHUB_ENV
       
 
@@ -74,10 +69,10 @@ jobs:
         if: steps.check_dockercompose.outputs.files_exists == 'true'
         run: |-
           # Clean up old docker compose
-          gcloud compute ssh umasscybersec@$vm_name --zone=$vm_zone --command="(cd /home/umasscybersec/challenges/${{ env.challenge }} && (docker compose down; cd .. && rm -rf ./${{ env.challenge }})) || true"
+          gcloud compute ssh umasscybersec@$vm_name --zone=${{ vars.VM_ZONE }} --command="(cd /home/umasscybersec/challenges/${{ env.challenge }} && (docker compose down; cd .. && rm -rf ./${{ env.challenge }})) || true"
           # Upload and start new one
-          gcloud compute scp --zone=$vm_zone --recurse challenges/${{ github.head_ref }} umasscybersec@$vm_name:/home/umasscybersec/challenges/${{ env.challenge }}
-          gcloud compute ssh umasscybersec@$vm_name --zone=$vm_zone --command="cd /home/umasscybersec/challenges/${{ env.challenge }} && docker compose up --build -d"       
+          gcloud compute scp --zone=${{ vars.VM_ZONE }} --recurse challenges/${{ github.head_ref }} umasscybersec@$vm_name:/home/umasscybersec/challenges/${{ env.challenge }}
+          gcloud compute ssh umasscybersec@$vm_name --zone=${{ vars.VM_ZONE }} --command="cd /home/umasscybersec/challenges/${{ env.challenge }} && docker compose up --build -d"       
       # For docker
       - name: Docker Auth
         if: steps.check_dockercompose.outputs.files_exists != 'true' && steps.check_dockerfile.outputs.files_exists == 'true'
@@ -105,7 +100,7 @@ jobs:
           done;
           #TODO unsudo
           gcloud auth configure-docker us-central1-docker.pkg.dev
-          gcloud compute ssh umasscybersec@${{ env.vm_name }} --zone=${{ env.vm_zone }} --command="docker kill ${{ env.challenge }} || true; sudo docker rm ${{ env.challenge }} || true; sudo docker run --pull=always -d --name ${{ env.challenge }} $PORT_STR ${{ env.image }}"
+          gcloud compute ssh umasscybersec@${{ env.vm_name }} --zone=${{ vars.VM_ZONE }} --command="docker kill ${{ env.challenge }} || true; sudo docker rm ${{ env.challenge }} || true; sudo docker run --pull=always -d --name ${{ env.challenge }} $PORT_STR ${{ env.image }}"
       # Other tasks
       - name: Upload Static Files
         if: steps.check_static.outputs.files_exists == 'true'
