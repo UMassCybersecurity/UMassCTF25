@@ -15,12 +15,12 @@ jobs:
           echo "challenge=${tokens[1]}" >> $GITHUB_ENV
       - name: test 
         run: |-
-        if [ -z "$a" ]
-        then
-          echo "not defined"
-        else 
-          echo "defined"
-        fi
+          if [ -z "$a" ]
+          then
+            echo "not defined"
+          else 
+            echo "defined"
+          fi
       - name: test does not exist 
         run: |-
           if [ ${{env.category}} == 'web' && [[ ! -v ${{ vars.random}} ]] ]; then 
