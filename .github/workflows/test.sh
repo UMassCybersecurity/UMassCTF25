@@ -1,6 +1,8 @@
-if [ -z "$a" ]
+a="test"
+b="test"
+if [ ! -z "$a" ] && [ $b == "test" ]
 then
-    echo "not defined"
+    echo "in vm" 
 else 
-    echo "defined"
+    echo "not in vm"
 fi
