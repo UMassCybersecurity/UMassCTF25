@@ -113,6 +113,10 @@ Before deploying your challenge, you must validate that the automatic end to end
 #TODO PR reivew (ping someone)? 
 #TODO: also put don't edit main branch and stuff in here 
 
+
+to dev 
+to prod 
+
 ### 🎮 Playtesting Challenges
 #TODO: put connection info in here 
 
