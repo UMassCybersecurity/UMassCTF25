@@ -22,7 +22,8 @@ UMassCTFd is an automated challenge + CTFd deployer used to provision and manage
 
 ###  📖 Overview
 
-**Challenge Categories** <br>  
+<details>
+  <summary><h5>Challenge Categories</h5></summary>
 Each challenge category will have its own subdirectory under `/challenges`. All challenge directories must be placed in a subdirectory under `/challenges/${CATEGORY}`.
 
 ```
@@ -47,7 +48,9 @@ The categories are:
 - 🌍 OSINT 
 
 > [!NOTE]
-> To add a new category, you can just create a new subdirectory under `/challenges.` 
+> To add a new category, you can just create a new subdirectory under `/challenges`. 
+
+</details>
 
 **Challenge Types** 
 
