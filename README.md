@@ -25,7 +25,7 @@ UMassCTFd is an automated challenge + CTFd deployer used to provision and manage
 Challenges can be deployed on virtual machines hosted on a cloud platform or on-prem servers.  
 
 <details>
-  <summary><h4>GCP</h4></summary>
+  <summary><h3>GCP</h3></summary>
 <b> 1. Authenticate with the GCP CLI  </b>
 
 <b> 2. Create a VM for each challenge category </b> 
