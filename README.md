@@ -103,6 +103,8 @@ Both CTFd and all challenges are hosted on GCP. The diagram below gives a high-l
     Create a PR to promote your challenge to the prod branch.
 
 
+- Use base image of alpine wnv possible (ex-alpine) # link video of how to make docker images smaller (provide the tips and tricks here?) -> checklist dropdown?  
+
 Exposing ports: 
 
 Pwn: 30000-31000
@@ -318,9 +320,29 @@ gcloud projects add-iam-policy-binding "umassctf25-dev" \
 
 ### 2. Set up CTFd
 
+#TODO This article is fucked so just include commands manually lowkey, also create script 
+
 Follow this https://dev.to/roeeyn/how-to-setup-your-ctfd-platform-with-https-and-ssl-3fda article to set up CTFd. It can be hosted on one of the challenge VMs or a seperate VM depending on anticipated traffic.   
 
+Expose HTTP/HTTPs traffic on the VM hosting CTFd. 
+
 ### 3. Configure Github Repo &  Actions 
+
+1) Add `WORKLOAD_IDENTITY_PROVIDER_NAME` repo variable; to get value, run 
+```
+gcloud iam workload-identity-pools providers describe "umassctf25" \
+  --location="global" \
+  --workload-identity-pool="github" \
+  --format="value(name)"
+
+expected format: projects/75881137583/locations/global/workloadIdentityPools/github/providers/umassctf25
+```
+
+2) Add `PROJECT_ID` repo variable; to get value #TODO
+
+3) 
+
+
 ---
 #TODO:
 - step to install docker on all machines? 
@@ -334,4 +356,8 @@ Follow this https://dev.to/roeeyn/how-to-setup-your-ctfd-platform-with-https-and
 - The instructions need to be rewritten they are lowkey a mess, need to add variables 
 - Create a port tracker file (provide ranges for each category), then expose those ranges : put note that says this will be automatically managed soon 
 - automate DNS? and nginx config figure out
-- setup bastion host for dev environmnet? 
+- setup bastion host for dev environmnet?
+- look into autoscaling for the VMs
+- solve scripts
+- description for ynetd
+- move images to docs folder or smthing
