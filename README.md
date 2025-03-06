@@ -23,7 +23,7 @@ UMassCTFd is an automated challenge + CTFd deployer used to provision and manage
 ###  📖 Overview
 
 <details>
-  <summary><h5>Challenge Categories</h5></summary>
+  <summary><h4>Challenge Categories</h4></summary>
 Each challenge category will have its own subdirectory under `/challenges`. All challenge directories must be placed in a subdirectory under `/challenges/${CATEGORY}`.
 
 ```
