@@ -5,22 +5,60 @@
 
 ---
 * [🚩 What is UMassCTFd?](#-UMassCtfd)
-    + [✨ Features](#-features)
-* [🚀 Quickstart](#-quickstart)
-* [👩‍💻 Installation & Deployment](#-deploy)
-
+    + [📖 Overview](#-overview)
+    + [🏗️ Architecture](#-architecture)
+* [🚀 Quickstart - *for challenge authors*](#-quickstart)
+    + [💻 Writing Challenges](#-writing-challs)
+    + [🎉 Deploying Challenges](#-deploying-challs)
+* [🛠️  Installation & Deployment - *for infra team*](#-deploy)
+    + [1️⃣ Provision Cloud or On-Prem Services](#-provision)
+    + [2️⃣  Setup CTFd](#-setup-ctfd)
+    + [ 3️⃣ Configure Github Repo & Actions](#-github-repo)
 ---
 
 ## 🚩 What is UMassCTFd?  
 
 UMassCTFd is an automated challenge + CTFd deployer used to provision and manage UMass Cybersecurity Club's CTFs and internal training platforms. 
 
-### ✨Features 
+###  📖 Overview
+
+**Challenge Categories** <br>  
+Each challenge category will have its own subdirectory under `/challenges`. All challenge directories must be placed in a subdirectory under `/challenges/${CATEGORY}`.
+
+```
+# Example Structure 
+/challenges/
+  ├── crypto/
+  │    ├── challenge1/
+  │    ├── challenge2/
+  ├── web/
+  │    ├── challenge1/
+  │    ├── challenge2/
+```
+
+The categories are: 
+-  🔐 crypto 
+- 🔍 forensics 
+-  🔌 hardware 
+- 🎲 misc 
+- 💣 pwn
+- 🔄 rev 
+-  🌐 web
+- 🌍 OSINT 
+
+> [!INFO]
+> To add a new category, you can just create a new subdirectory under `/challenges.` 
+
+**Challenge Types** 
+
+**Environments** 
+
+**Environments** 
 
 ## 🚀 Quickstart 
 
 
-## 👩‍💻 Installation & Deployment
+## 🛠️  Installation & Deployment
 
 ### 1. Provision Cloud or On-Prem Services 
 Challenges can be deployed on virtual machines hosted on a cloud platform or on-prem servers.  
