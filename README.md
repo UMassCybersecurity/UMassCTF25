@@ -9,7 +9,7 @@
     <a href="https://ctf.umasscybersec.org/"> 🚩 UMass CTF 2025 </a> 
   </h3>
   <h3 align="center">
-    🕠 Date: April 18th 2 PM - 20th 8 PM 
+    🕠 April 18th 2 PM - 20th 8 PM 
   </h3>
 </p>
 
@@ -26,6 +26,7 @@
     + [1️⃣ Provision Cloud or On-Prem Services](#-provision)
     + [2️⃣  Setup CTFd](#-setup-ctfd)
     + [ 3️⃣ Configure Github Repo & Actions](#-github-repo)
+* Custom Configuration
 ---
 
 ## 🚩 What is UMassCTFd?  
@@ -62,7 +63,7 @@ The default challenge categories are:
 To add a new category, you can just create a new subdirectory under `/challenges`.
 
 **Challenge Contents:**  
-We support automated deployment of challenges with static assets, interactive docker containers, both or neither, and even more complicated setups (via Docker Compose)!  
+We support automated deployment of challenges with static assets, interactive Docker containers, both or neither, and even more complicated setups (via Docker Compose)!  
 
 **Environments:**  
 We have a "dev" and "prod" environment, each with an associated Github branch.  
@@ -119,6 +120,10 @@ Before deploying your challenge, you must validate that the automatic end to end
 **Merging**
 #TODO PR reivew (ping someone)? 
 #TODO: also put don't edit main branch and stuff in here 
+
+
+to dev 
+to prod 
 
 ### 🎮 Playtesting Challenges
 #TODO: put connection info in here 
