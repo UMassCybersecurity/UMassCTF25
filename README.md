@@ -52,6 +52,41 @@ The categories are:
 
 </details>
 
+
+<details>
+  <summary><strong>Challenge Categories</strong></summary>
+
+  <p>Each challenge category will have its own subdirectory under <code>/challenges</code>. All challenge directories must be placed in a subdirectory under <code>/challenges/${CATEGORY}</code>.</p>
+
+  <pre>
+  # Example Structure 
+  /challenges/
+    ├── crypto/
+    │    ├── challenge1/
+    │    ├── challenge2/
+    ├── web/
+    │    ├── challenge1/
+    │    ├── challenge2/
+  </pre>
+
+  <p>The categories are:</p>
+  <ul>
+    <li>🔐 <strong>crypto</strong></li>
+    <li>🔍 <strong>forensics</strong></li>
+    <li>🔌 <strong>hardware</strong></li>
+    <li>🎲 <strong>misc</strong></li>
+    <li>💣 <strong>pwn</strong></li>
+    <li>🔄 <strong>rev</strong></li>
+    <li>🌐 <strong>web</strong></li>
+    <li>🌍 <strong>OSINT</strong></li>
+  </ul>
+
+  <blockquote>
+    <p><strong>Note:</strong> To add a new category, you can just create a new subdirectory under <code>/challenges</code>.</p>
+  </blockquote>
+
+</details>
+
 **Challenge Types** 
 
 **Environments** 
