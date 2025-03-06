@@ -70,6 +70,12 @@ This [repo](https://github.com/google-github-actions/auth) has detailed document
 > [!Note]
 > Woarkload Identity Federation is used to establish a trust delgation relationship between Github Actions workflow invocation and GCP permissions without storing service account keys to avoid long-lived credentials  
 
+
+> [!NOTE]
+>
+> Changing the `permissions` block may remove some default permissions. See the
+> [permissions documentation][github-perms] for more information.
+
 *6a. Create a Workload Identity Pool*
 ```sh 
 
