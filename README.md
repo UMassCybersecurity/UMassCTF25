@@ -310,8 +310,14 @@ gcloud projects add-iam-policy-binding "umassctf25-dev" \
   --member="principalSet://iam.googleapis.com/projects/75881137583/locations/global/workloadIdentityPools/github/attribute.repository/UMassCTF25" \
   --role="roles/storage.admin"
 
+gcloud projects add-iam-policy-binding "umassctf25-dev" \
+  --member="principalSet://iam.googleapis.com/projects/75881137583/locations/global/workloadIdentityPools/github/attribute.repository/UMassCTF25" \
+  --role="roles/storage.objectAdmin"
+
 ```
 </details>
+
+# TEST COMPUTE FIRST to see if the permissions are getting carried over, scp? 
 
 <details>
   <summary><h4>Proxmox</h4></summary>
@@ -371,4 +377,4 @@ expected format: projects/75881137583/locations/global/workloadIdentityPools/git
 - solve scripts
 - description for ynetd
 - move images to docs folder or smthing
-- clean up branches + random folders in this repo 
+- clean up branches + random folders in this repo, old PRs
