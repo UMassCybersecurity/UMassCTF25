@@ -23,37 +23,6 @@ UMassCTFd is an automated challenge + CTFd deployer used to provision and manage
 ###  📖 Overview
 
 <details>
-  <summary><h4>Challenge Categories</h4></summary>
-Each challenge category will have its own subdirectory under `/challenges`. All challenge directories must be placed in a subdirectory under `/challenges/${CATEGORY}`.
-
-```
-# Example Structure 
-/challenges/
-  ├── crypto/
-  │    ├── challenge1/
-  │    ├── challenge2/
-  ├── web/
-  │    ├── challenge1/
-  │    ├── challenge2/
-```
-
-The categories are: 
--  🔐 crypto 
-- 🔍 forensics 
--  🔌 hardware 
-- 🎲 misc 
-- 💣 pwn
-- 🔄 rev 
--  🌐 web
-- 🌍 OSINT 
-
-> [!NOTE]
-> To add a new category, you can just create a new subdirectory under `/challenges`. 
-
-</details>
-
-
-<details>
   <summary><strong>Challenge Categories</strong></summary>
 
   <p>Each challenge category will have its own subdirectory under <code>/challenges</code>. All challenge directories must be placed in a subdirectory under <code>/challenges/${CATEGORY}</code>.</p>
@@ -87,7 +56,12 @@ The categories are:
 
 </details>
 
-**Challenge Types** 
+<details>
+  <summary><strong>Challenge Types</strong></summary>
+  A challenge can be static or dynamic.
+
+  > **🚨 Important:** Dynamic challenges require a running service and should be properly containerized to ensure stability.
+</details>
 
 **Environments** 
 
