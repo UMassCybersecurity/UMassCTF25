@@ -26,16 +26,38 @@ Challenges can be deployed on virtual machines hosted on a cloud platform or on-
 
 <details>
   <summary><h3>GCP</h3></summary>
-<b> 1. Create a GCP Project </b>
-`gcloud projects create PROJECT_ID --name="<project name>"`
 
-<b> 2. Authenticate with the GCP CLI  </b>
+**1. Create a GCP Project**  
+```sh
+gcloud projects create PROJECT_ID --name="<PROJECT_NAME>"
+```
 
+**2. Authenticate with the GCP CLI**  
+```sh
+gcloud auth login
+```
+**3. Set GCP CLI project config**  
+```sh
+gcloud config set project <PROJECT_ID>
+```
 
-<b> 2. Create a VM for each challenge category </b> 
+**4. Create a VM for each challenge category**  
+```sh
+for category in <CATEGORY_1 ... CATEGORY_N>; do
+  gcloud compute instances create "${category}-challs" --zone=<ZONE> --machine-type=<MACHINE_TYPE>
+done
+```
+*Example:* 
+```sh
+for category in web pwn misc; do
+  gcloud compute instances create "${category}-challs" --zone=us-east1-b --machine-type=e2-medium
+done
+```
 
-<b> 3. Expose ports </b> 
-
+**5. Expose ports**  
+```sh
+gcloud compute firewall-rules create allow-http --allow=tcp:80
+```
 </details>
 
 <details>
