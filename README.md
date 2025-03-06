@@ -37,7 +37,7 @@ UMassCTFd is an automated challenge + CTFd deployer used to provision and manage
 
 **Challenge Categories:**
 
-Each challenge category will have its own subdirectory under `/challenges`. All challenge directories must be placed in a subdirectory under `/challenges/${CATEGORY}`
+Each challenge category will have its own subdirectory under `/challenges`. All challenge directories must be placed in a subdirectory under `/challenges/${CATEGORY}/`
 ```
 # Example Structure
 
@@ -89,7 +89,6 @@ Both CTFd and all challenges are hosted on GCP. The diagram below gives a high-l
 > [!IMPORTANT]
 > Flag Format: `UMASS{FLAG}`
 
-
 #TODO fix this up, go over info.yaml  
     Create a new directory in the appropriate category for your challenge.
         Use the following format (challenges/[category]/[challenge name])
@@ -111,6 +110,17 @@ Pwn: 30000-31000
 Crypto: 40000-41000
 Web: 50000-51000
 Other: 60000-61000
+
+#TODO: have the chat reword this
+1. Create new directory for your challenge in it's category directory (`/challenges/${CHALLENGE_CATEGORY}/${CHALLENGE_NAME}`)
+> [!IMPORTANT] Please make sure your challenge name is in the following regex: #TODO insert regex here
+2. Each challenge should contain the following files:
+- required:
+    - `Dockerfile` or `docker-compose.yaml`
+    - `info.yaml`
+ 
+- if static: a `static` subdirectory with all downloadable assets here
+- either a 
 
 
 ### 🎉 Deploying Challenges
