@@ -123,6 +123,17 @@ Other: 60000-61000
 - either a 
 
 
+
+
+
+for Web: 
+
+
+for Pwn: 
+
+
+
+
 ### 🎉 Deploying Challenges
 
 **End to End Tests**
