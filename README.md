@@ -4,12 +4,23 @@
 </p>
 
 ---
+<p align="center">
+  <h3 align="center">
+    <a href="https://ctf.umasscybersec.org/"> 🚩 UMass CTF 2025 </a> 
+  </h3>
+  <h3 align="center">
+    🕠 Date: April 18th 2 PM - 20th 8 PM 
+  </h3>
+</p>
+
+---
 * [🚩 What is UMassCTFd?](#-UMassCtfd)
     + [📖 Overview](#-overview)
     + [🏗️ Architecture](#-architecture)
 * [🚀 Quickstart - *for challenge authors*](#-quickstart)
     + [💻 Writing Challenges](#-writing-challs)
     + [🎉 Deploying Challenges](#-deploying-challs)
+    + [ 🎮 Playtesting Challenges](#-deploying-challs)
 * [🛠️  Installation & Deployment - *for infra team*](#-deploy)
     + [1️⃣ Provision Cloud or On-Prem Services](#-provision)
     + [2️⃣  Setup CTFd](#-setup-ctfd)
@@ -23,7 +34,7 @@ UMassCTFd is an automated challenge + CTFd deployer used to provision and manage
 ###  📖 Overview
 
 <details>
-  <summary><strong>Challenge Categories</strong></summary>
+  <summary><strong>Challenge Categories:</strong></summary>
 
   <p>Each challenge category will have its own subdirectory under <code>/challenges</code>. All challenge directories must be placed in a subdirectory under <code>/challenges/${CATEGORY}</code>.</p>
 
@@ -56,16 +67,28 @@ UMassCTFd is an automated challenge + CTFd deployer used to provision and manage
 
 </details>
 
-<details>
-  <summary><strong>Challenge Types</strong></summary>
-  A challenge can be static or dynamic.
+<br>
 
-  > **🚨 Important:** Dynamic challenges require a running service and should be properly containerized to ensure stability.
-</details>
+**Challenge Contents:**  
+We support automated deployment of challenges with static assets, interactive docker containers, both or neither, and even more complicated setups (via `docker compose`)!  
 
-**Environments** 
+**Environments:**  
+We have a "dev" and "prod" environment, each with an associated Github branch.  
+As per best GitOps practices 🤓, you should play test your challenge in the dev environment first before promoting it to prod.   
 
-**Environments** 
+> [!IMPORTANT]  
+> Our prod environment will not be set up until ~1 week before the CTF to reduce infrastructure costs.
+
+###  🏗️ Architecture
+
+This repo is the SINGLE SOURCE OF TRUTH. Every challenge's information on CTFd (ex. description, points, etc.) & source code will live here. 
+
+> [!WARNING]  
+> Making manual changes in CTFd WILL get overriden by our CI/CD pipelines. Deploying and updating challenges should only be done through this repo.  
+
+
+
+
 
 ## 🚀 Quickstart 
 
@@ -165,3 +188,4 @@ gcloud iam workload-identity-pools describe "github" \
 - why isnt [!NOTE] working?
 - TODO: fix replacements in the workload identity provider
 - make the workloa didentity provider steps a substep
+- make sure to mention access in terms of merging, who to ping, etc. 
