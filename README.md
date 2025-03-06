@@ -67,7 +67,7 @@ gcloud compute firewall-rules create allow-http --allow=tcp:80
 
 This [repo](https://github.com/google-github-actions/auth) has detailed documentation about Github Action authentication to GCP.
 
-> [!INFO]
+> [!Note]
 > Woarkload Identity Federation is used to establish a trust delgation relationship between Github Actions workflow invocation and GCP permissions without storing service account keys to avoid long-lived credentials  
 
 *6a. Create a Workload Identity Pool*
@@ -83,5 +83,7 @@ This [repo](https://github.com/google-github-actions/auth) has detailed document
 </details>
 
 ---
-#TODO: make these expandable sections 
+#TODO:
+- squash commits
+
 
