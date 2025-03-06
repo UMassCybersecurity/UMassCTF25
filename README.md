@@ -33,13 +33,12 @@ UMassCTFd is an automated challenge + CTFd deployer used to provision and manage
 
 ###  📖 Overview
 
-<details>
-  <summary><strong>Challenge Categories:</strong></summary>
+**Challenge Categories:**
 
-  <p>Each challenge category will have its own subdirectory under <code>/challenges</code>. All challenge directories must be placed in a subdirectory under <code>/challenges/${CATEGORY}</code>.</p>
+Each challenge category will have its own subdirectory under `/challenges`. All challenge directories must be placed in a subdirectory under `/challenges/${CATEGORY}`
+```
+  # Example Structure
 
-  <pre>
-  # Example Structure 
   /challenges/
     ├── crypto/
     │    ├── challenge1/
@@ -47,29 +46,22 @@ UMassCTFd is an automated challenge + CTFd deployer used to provision and manage
     ├── web/
     │    ├── challenge1/
     │    ├── challenge2/
-  </pre>
+```
 
-  <p>The categories are:</p>
-  <ul>
-    <li>🔐 <strong>crypto</strong></li>
-    <li>🔍 <strong>forensics</strong></li>
-    <li>🔌 <strong>hardware</strong></li>
-    <li>🎲 <strong>misc</strong></li>
-    <li>💣 <strong>pwn</strong></li>
-    <li>🔄 <strong>rev</strong></li>
-    <li>🌐 <strong>web</strong></li>
-    <li>🌍 <strong>OSINT</strong></li>
-  </ul>
+The categories are: 
+-  🔐 crypto 
+- 🔍 forensics 
+-  🔌 hardware 
+- 🎲 misc 
+- 💣 pwn
+- 🔄 rev 
+-  🌐 web
+- 🌍 OSINT 
 
-  <blockquote>
-    <p><strong>Note:</strong> To add a new category, you can just create a new subdirectory under <code>/challenges</code>.</p>
-  </blockquote>
-
-</details>
-
+To add a new category, you can just create a new subdirectory under `/challenges`.
 
 **Challenge Contents:**  
-We support automated deployment of challenges with static assets, interactive docker containers, both or neither, and even more complicated setups (via `docker compose`)!  
+We support automated deployment of challenges with static assets, interactive docker containers, both or neither, and even more complicated setups (via Docker Compose)!  
 
 
 **Environments:**  
@@ -81,13 +73,13 @@ As per best GitOps practices 🤓, you should play test your challenge in the de
 
 ###  🏗️ Architecture
 
-This repo is the SINGLE SOURCE OF TRUTH. Every challenge's information on CTFd (ex. description, points, etc.) & source code will live here. 
+This repo is the *SINGLE SOURCE OF TRUTH*. Every challenge's information on CTFd (ex. description, points, etc.) & source code will live here. 
 
 > [!WARNING]  
 > Making manual changes in CTFd *WILL* get overriden by our CI/CD pipelines. Deploying and updating challenges should only be done through this repo. 
-> We plan to add support for updating/syncing in CTFd as well in the near future.  
+> We plan to add support for updating/syncing challenge information in CTFd as well in the near future.  
 
-
+Both CTFd and all challenges are hosted on GCP. The diagram below gives a high-level overview of how our infrastructure works:  
 
 
 ## 🚀 Quickstart 
