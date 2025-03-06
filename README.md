@@ -340,7 +340,17 @@ expected format: projects/75881137583/locations/global/workloadIdentityPools/git
 
 2) Add `PROJECT_ID` repo variable; to get value #TODO
 
-3) 
+3) Add "WEB_CHALLS_VM_NAME" "PWN_CRYPTO_CHALLS_VM_NAME" "MIXED_CHALLS_VM_NAME" 
+"web-challs"
+"mixed-challs"
+"pwn-crypto-challs"
+
+4) Add `ZONE`
+5) Add `REGION`
+6) Add `STATIC_ASSETS_BUCKET_NAME`
+"umassctf25-dev-static-assets"
+---
+7) Add `CTFD_URL`
 
 
 ---
@@ -361,3 +371,4 @@ expected format: projects/75881137583/locations/global/workloadIdentityPools/git
 - solve scripts
 - description for ynetd
 - move images to docs folder or smthing
+- clean up branches + random folders in this repo 
