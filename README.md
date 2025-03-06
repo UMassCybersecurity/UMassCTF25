@@ -21,6 +21,7 @@
     + [💻 Writing Challenges](#-writing-challs)
     + [🎉 Deploying Challenges](#-deploying-challs)
     + [ 🎮 Playtesting Challenges](#-deploying-challs)
+    + [✏️ Editing Challenges](#-editing-challs)
 * [🛠️  Installation & Deployment - *for infra team*](#-deploy)
     + [1️⃣ Provision Cloud or On-Prem Services](#-provision)
     + [2️⃣  Setup CTFd](#-setup-ctfd)
@@ -114,6 +115,7 @@ Before deploying your challenge, you must validate that the automatic end to end
 ### 🎮 Playtesting Challenges
 #TODO: put connection info in here 
 
+### ✏️ Editing Challenges
 
 ## 🛠️  Installation & Deployment
 
