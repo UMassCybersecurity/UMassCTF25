@@ -37,21 +37,21 @@ UMassCTFd is an automated challenge + CTFd deployer used to provision and manage
 
 Each challenge category will have its own subdirectory under `/challenges`. All challenge directories must be placed in a subdirectory under `/challenges/${CATEGORY}`
 ```
-  # Example Structure
+# Example Structure
 
-  /challenges/
-    ├── crypto/
-    │    ├── challenge1/
-    │    ├── challenge2/
-    ├── web/
-    │    ├── challenge1/
-    │    ├── challenge2/
+/challenges/
+ ├── crypto/
+ │    ├── challenge1/
+ │    ├── challenge2/
+ ├── web/
+ │    ├── challenge1/
+ │    ├── challenge2/
 ```
 
 The categories are: 
 -  🔐 crypto 
 - 🔍 forensics 
--  🔌 hardware 
+-  🔌hardware 
 - 🎲 misc 
 - 💣 pwn
 - 🔄 rev 
@@ -81,8 +81,38 @@ This repo is the *SINGLE SOURCE OF TRUTH*. Every challenge's information on CTFd
 
 Both CTFd and all challenges are hosted on GCP. The diagram below gives a high-level overview of how our infrastructure works:  
 
-
 ## 🚀 Quickstart 
+
+### 💻 Writing Challenges
+
+> [!IMPORTANT]
+> Flag Format: `UMASS{FLAG}`
+
+
+#TODO fix this up, go over info.yaml  
+    Create a new directory in the appropriate category for your challenge.
+        Use the following format (challenges/[category]/[challenge name])
+            Please make sure the challenge name does not contain any underscores, capital letters, or special characters.
+        Each challenge should have the following things at the top level:
+            an optional static folder with downloadable assets
+            a Dockerfile/docker-compose.yaml and a config.env if dynamic (see this config.env for reference)
+            info.yaml (see this info.yaml for reference)
+    Create a PR to merge into the dev branch.
+    Test your challenges in the CTFd dev environment. Create any follow up PRs as necessary to make edits to your challenge.
+    Create a PR to promote your challenge to the prod branch.
+
+### 🎉 Deploying Challenges
+
+**End to End Tests**
+Before deploying your challenge, you must validate that the automatic end to end(E2E) tests have passed. 
+#TODO: say what we test, include screenshot of green check mark, include instructions for troubleshooting if they fail 
+
+**Merging**
+#TODO PR reivew (ping someone)? 
+#TODO: also put don't edit main branch and stuff in here 
+
+### 🎮 Playtesting Challenges
+#TODO: put connection info in here 
 
 
 ## 🛠️  Installation & Deployment
@@ -180,4 +210,6 @@ gcloud iam workload-identity-pools describe "github" \
 - why isnt [!NOTE] working?
 - TODO: fix replacements in the workload identity provider
 - make the workloa didentity provider steps a substep
-- make sure to mention access in terms of merging, who to ping, etc. 
+- make sure to mention access in terms of merging, who to ping, etc.
+- have the dev environment setup and have IP and password information in this README so people can connect to dev instance
+
