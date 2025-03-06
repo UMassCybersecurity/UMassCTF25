@@ -46,7 +46,7 @@ The categories are:
 -  🌐 web
 - 🌍 OSINT 
 
-> **INFO**
+> [!WARNING]
 > To add a new category, you can just create a new subdirectory under `/challenges.` 
 
 **Challenge Types** 
