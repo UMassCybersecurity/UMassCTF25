@@ -26,7 +26,11 @@ Challenges can be deployed on virtual machines hosted on a cloud platform or on-
 
 <details>
   <summary><h3>GCP</h3></summary>
-<b> 1. Authenticate with the GCP CLI  </b>
+<b> 1. Create a GCP Project </b>
+`gcloud projects create PROJECT_ID --name="<project name>"`
+
+<b> 2. Authenticate with the GCP CLI  </b>
+
 
 <b> 2. Create a VM for each challenge category </b> 
 
@@ -35,7 +39,7 @@ Challenges can be deployed on virtual machines hosted on a cloud platform or on-
 </details>
 
 <details>
-  <summary><b>Proxmox</b></summary>
+  <summary><h3>Proxmox</h3></summary>
   This is the hidden content that appears when you click the summary.
 </details>
 
