@@ -67,16 +67,16 @@ UMassCTFd is an automated challenge + CTFd deployer used to provision and manage
 
 </details>
 
-<br>
 
 **Challenge Contents:**  
 We support automated deployment of challenges with static assets, interactive docker containers, both or neither, and even more complicated setups (via `docker compose`)!  
+
 
 **Environments:**  
 We have a "dev" and "prod" environment, each with an associated Github branch.  
 As per best GitOps practices 🤓, you should play test your challenge in the dev environment first before promoting it to prod.   
 
-> [!IMPORTANT]  
+> [!NOTE]  
 > Our prod environment will not be set up until ~1 week before the CTF to reduce infrastructure costs.
 
 ###  🏗️ Architecture
@@ -84,8 +84,8 @@ As per best GitOps practices 🤓, you should play test your challenge in the de
 This repo is the SINGLE SOURCE OF TRUTH. Every challenge's information on CTFd (ex. description, points, etc.) & source code will live here. 
 
 > [!WARNING]  
-> Making manual changes in CTFd WILL get overriden by our CI/CD pipelines. Deploying and updating challenges should only be done through this repo.  
-
+> Making manual changes in CTFd *WILL* get overriden by our CI/CD pipelines. Deploying and updating challenges should only be done through this repo. 
+> We plan to add support for updating/syncing in CTFd as well in the near future.  
 
 
 
