@@ -27,9 +27,11 @@ Challenges can be deployed on virtual machines hosted on a cloud platform or on-
 <details>
   <summary><h3>GCP</h3></summary>
 
-**1. Create a GCP Project**  
+**1. Create a GCP project**  
 ```sh
-gcloud projects create PROJECT_ID --name="<PROJECT_NAME>"
+# TODO: replace ${PROJECT_NAME} with your GCP project name 
+
+gcloud projects create PROJECT_ID --name="${PROJECT_NAME}"
 ```
 
 **2. Authenticate with the GCP CLI**  
@@ -38,26 +40,41 @@ gcloud auth login
 ```
 **3. Set GCP CLI project config**  
 ```sh
-gcloud config set project <PROJECT_ID>
+# TODO: replace ${PROJECT_ID} with your GCP project ID 
+
+gcloud config set project ${PROJECT_ID}
 ```
 
 **4. Create a VM for each challenge category**  
 ```sh
-for category in <CATEGORY_1 ... CATEGORY_N>; do
-  gcloud compute instances create "${category}-challs" --zone=<ZONE> --machine-type=<MACHINE_TYPE>
+# TODO: replace ${CATEGORY_1} ${CATEGORY_2} ... ${CATEGORY_N} with your challenge categories; replace ${ZONE} and ${MACHINE_TYPE} with your GCP zone and Compute Engine machine type respectively 
+
+for category in ${CATEGORY_1} ${CATEGORY_2} ${CATEGORY_N}; do
+  gcloud compute instances create "${category}-challs" --zone=${ZONE} --machine-type=${MACHINE_TYPE}
 done
-```
-*Example:* 
-```sh
-for category in web pwn misc; do
-  gcloud compute instances create "${category}-challs" --zone=us-east1-b --machine-type=e2-medium
-done
+
+# Example: 
+# for category in web pwn misc; do
+#   gcloud compute instances create "${category}-challs" --zone=us-east1-b --machine-type=e2-medium
+# done
 ```
 
-**5. Expose ports**  
+**5. Expose ports** #TODO 
 ```sh
 gcloud compute firewall-rules create allow-http --allow=tcp:80
 ```
+**6. Authenticate to GCP via Workload Identity Federation**
+
+This [repo](https://github.com/google-github-actions/auth) has detailed documentation about Github Action authentication to GCP.
+
+> [!INFO]
+> Woarkload Identity Federation is used to establish a trust delgation relationship between Github Actions workflow invocation and GCP permissions without storing service account keys to avoid long-lived credentials  
+
+*6a. Create a Workload Identity Pool*
+```sh 
+
+```
+
 </details>
 
 <details>
