@@ -22,10 +22,11 @@ UMassCTFd is an automated challenge + CTFd deployer used to provision and manage
 
 ## 👩‍💻 Installation & Deployment
 
+### 1. Provision Cloud or On-Prem Services 
 Challenges can be deployed on virtual machines hosted on a cloud platform or on-prem servers.  
 
 <details>
-  <summary><h3>GCP</h3></summary>
+  <summary><h4>GCP</h4></summary>
 
 **1. Create a GCP project**  
 ```sh
@@ -67,29 +68,50 @@ gcloud compute firewall-rules create allow-http --allow=tcp:80
 
 This [repo](https://github.com/google-github-actions/auth) has detailed documentation about Github Action authentication to GCP.
 
-> [!Note]
-> Woarkload Identity Federation is used to establish a trust delgation relationship between Github Actions workflow invocation and GCP permissions without storing service account keys to avoid long-lived credentials  
-
-
 > [!NOTE]
->
-> Changing the `permissions` block may remove some default permissions. See the
-> [permissions documentation][github-perms] for more information.
+> Woarkload Identity Federation is used to establish a trust delgation relationship between Github Actions workflow invocation and GCP permissions without storing service account keys to avoid long-lived credentials. 
+> Definitions: 
+> - Workload Identity Pool: "container" for external identities, groups multiple identity providers (ex. Github) and allows them to assume GCP IAM roles; the Workload Identity Pool will have direct IAM permissions on GCP resources.
+> - Workload Identity Provider: specific OIDC identity source (ex. Github) within a Workload Identity Pool 
 
 *6a. Create a Workload Identity Pool*
 ```sh 
+# TODO: replace ${PROJECT_ID} with your value below.
 
+gcloud iam workload-identity-pools create "github" \
+  --project="${PROJECT_ID}" \
+  --location="global" \
+  --display-name="GitHub Actions Pool"
 ```
+
+*6b. Get full ID of Workload Identity Pool* 
+```sh
+# TODO: replace ${PROJECT_ID} with your value below.
+
+gcloud iam workload-identity-pools describe "github" \
+  --project="${PROJECT_ID}" \
+  --location="global" \
+  --format="value(name)"
+
+# value should be of format `projects/123456789/locations/global/workloadIdentityPools/github`
+```
+
+*6
+
 
 </details>
 
 <details>
-  <summary><h3>Proxmox</h3></summary>
+  <summary><h4>Proxmox</h4></summary>
   This is the hidden content that appears when you click the summary.
 </details>
 
+### 2. Set up CTFd
+
+### 3. Configure Github Repo &  Actions 
 ---
 #TODO:
 - squash commits
-
-
+- why isnt [!NOTE] working?
+- TODO: fix replacements in the workload identity provider
+- make the workloa didentity provider steps a substep
