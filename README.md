@@ -63,7 +63,7 @@ The categories are:
 To add a new category, you can just create a new subdirectory under `/challenges`.
 
 **Challenge Contents:**  
-We support automated deployment of challenges with static assets, interactive docker containers, both or neither, and even more complicated setups (via Docker Compose)!  
+We support automated deployment of challenges with static assets, interactive Docker containers, both or neither, and even more complicated setups (via Docker Compose)!  
 
 
 **Environments:**  
