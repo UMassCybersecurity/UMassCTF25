@@ -9,7 +9,7 @@
     <a href="https://ctf.umasscybersec.org/"> 🚩 UMass CTF 2025 </a> 
   </h3>
   <h3 align="center">
-    🕠 Date: April 18th 2 PM - 20th 8 PM 
+    🕠 April 18th 2 PM - 20th 8 PM 
   </h3>
 </p>
 
