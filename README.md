@@ -26,6 +26,7 @@
     + [1️⃣ Provision Cloud or On-Prem Services](#-provision)
     + [2️⃣  Setup CTFd](#-setup-ctfd)
     + [ 3️⃣ Configure Github Repo & Actions](#-github-repo)
+* Custom Configuration
 ---
 
 ## 🚩 What is UMassCTFd?  
