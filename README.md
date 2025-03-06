@@ -13,7 +13,7 @@
 
 ## 🚩 What is UMassCTFd?  
 
-UMassCTFd is an automated CTFd deployer used to provision and manage UMass Cybersecurity Club's CTFs and internal training platforms. 
+UMassCTFd is an automated challenge + CTFd deployer used to provision and manage UMass Cybersecurity Club's CTFs and internal training platforms. 
 
 ### ✨Features 
 
@@ -22,10 +22,23 @@ UMassCTFd is an automated CTFd deployer used to provision and manage UMass Cyber
 
 ## 👩‍💻 Installation & Deployment
 
+Challenges can be deployed on virtual machines hosted on a cloud platform or on-prem servers.  
+
 <details>
-<summary> <h3> GCP  </h3> </summary>
+  <summary><h4>GCP</h4></summary>
+<b> 1. Authenticate with the GCP CLI  </b>
+
+<b> 2. Create a VM for each challenge category </b> 
+
+<b> 3. Expose ports </b> 
 
 </details>
 
+<details>
+  <summary><b>Proxmox</b></summary>
+  This is the hidden content that appears when you click the summary.
+</details>
 
+---
+#TODO: make these expandable sections 
 
