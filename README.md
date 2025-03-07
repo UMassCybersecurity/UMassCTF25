@@ -224,6 +224,7 @@ Our **CTFd** instances and all challenges are hosted on **GCP**. The diagram bel
   <img src="./docs/images/successful_chall_update.png" alt="Successful Challenge Update" width="45%">
   <img src="./docs/images/chall_update_pipeline.png" alt="Challenge Update Pipeline" width="45%">
 </p>
+
 - If the pipeline fails, review the error messages provided in the workflow logs. These messages are detailed and will help you troubleshoot any issues.
 
 6. **After playtesting and finalizing your challenge in our dev CTFd environment, create a new PR to promote to the `prod` branch.**  
