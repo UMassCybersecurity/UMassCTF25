@@ -22,7 +22,6 @@
   - [💻 Writing Challenges](#-writing-challenges)
   - [🎉 Deploying Challenges](#-deploying-challenges)
   - [🎮 Playtesting Challenges](#-playtesting-challenges)
-  - [🎮 Playtesting Challenges](#-playtesting-challenges-1)
     - [Dev CTFd Environment](#dev-ctfd-environment)
     - [🔗 Accessing Your Deployed Challenge](#-accessing-your-deployed-challenge)
     - [✅ Playtesting Assignments](#-playtesting-assignments)
@@ -216,50 +215,6 @@ Other: 60000-61000
 
 6. **Delete** your challenge's branch. 
 
-### 🎮 Playtesting Challenges
-
-> [!IMPORTANT]
-> Connecting to our dev environment will required a Wireguard VPN connection. We will set this up in next couple of days and modify the README with connection instructions. 
-
-The dev CTFd environment will be a place where we can iterate on challenges, plan out, and break things before promoting stuff to the production CTFd environment. 
-
-1. Access your deployed challenge at: `34.139.68.169`. 
-To make an account in the dev CTFd environment, you need to create an account with the registration code 
-
-<style>
-.reveal-text {
-    background-color: #333; /* Dark gray */
-    color: #333; /* Hidden text */
-    padding: 2px 4px;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: color 0.3s ease-in-out;
-}
-.reveal-text:hover, .reveal-text:active {
-    color: white; /* Reveal text */
-}
-</style>
-
-Registration Code: <span class="reveal-text">D3v0psCluB_1s_Bett3r_C0de!6969</span>
-
-The admin account credentials are: `admin`: <span class="reveal-text">D3v0psCluB_1s_Bett3r!</span>
-
-2. Record status of assigned play testing and complete your playtesting assignments as per this spreadsheet: https://docs.google.com/spreadsheets/d/1qIww51LLm-_pstBHafcTBl6caXEumyQlD3uW41yzdFE/edit?gid=0#gid=0
-
-
-<style>
-.reveal-text {
-    background-color: #333; /* Dark gray */
-    color: #333; /* Hidden text */
-    padding: 2px 4px;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: color 0.3s ease-in-out;
-}
-.reveal-text:hover, .reveal-text:active {
-    color: white; /* Reveal text */
-}
-</style>
 
 ### 🎮 Playtesting Challenges
 
