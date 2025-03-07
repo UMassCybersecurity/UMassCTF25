@@ -402,3 +402,7 @@ expected format: projects/75881137583/locations/global/workloadIdentityPools/git
 - description for ynetd
 - move images to docs folder or smthing
 - clean up branches + random folders in this repo, old PRs
+- there are some stuff that should be variables in the gh actions
+- get rid of old gh pipeline workflow, document how pipeline workflow works 
+- get rid of ./examples/test
+- do i need region env variable?  
