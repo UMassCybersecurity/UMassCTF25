@@ -245,10 +245,10 @@ The dev CTFd environment is where we can **test, iterate on challenges, and make
 1. Navigate to: **[`34.139.68.169`](http://34.139.68.169)**  
 2. **Create an account** in the dev CTFd environment using the registration code below:  
 
-   **Registration Code**: `D3v0psCluB_1s_Bett3r_C0de!6969`  
-   **Dev CTFd `admin` Credentials**:  
-   - Username: `admin`  
-   - Password: `D3v0psCluB_1s_Bett3r!`
+   - Registration Code: `D3v0psCluB_1s_Bett3r_C0de!6969`  
+   - Dev CTFd `admin` Credentials:
+       - Username: `admin`  
+       - Password: `D3v0psCluB_1s_Bett3r!`
 
 
 #### ✅ Playtesting Assignments  
