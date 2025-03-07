@@ -100,6 +100,7 @@ Our **CTFd** instances and all challenges are hosted on **GCP**. The diagram bel
 
 ## 🚀 Quickstart - *for challenge authors* 
 
+> **Important:** We have three example challenges under `/challenges/examples/` —please use them as a reference!
 ### 💻 Writing Challenges
 
 > [!IMPORTANT]
@@ -217,14 +218,10 @@ Our **CTFd** instances and all challenges are hosted on **GCP**. The diagram bel
 4. **Merge your PR** into the `dev` branch. 
 
 5. **Verify the `challenge-update` pipeline passes**  
-Our "upload" pipeline is responsible for deploying your challenge to the GCP VM and updating or creating an entry in CTFd using the details from `info.yaml`. To ensure everything works correctly, check if this pipeline succeeds.  
-
-You can monitor the workflow run on the **Actions** page—look for a job named **"Challenge Update"**, which corresponds to the last commit message in your PR:  
-
-![](./docs/images/successful_chall_update.png)
-![](./docs/images/chall_update_pipeline.png)
-
-If the pipeline fails, review the error messages provided in the workflow logs. These messages are detailed and will help you troubleshoot any issues.
+- Our "upload" pipeline is responsible for deploying your challenge to the GCP VM and updating or creating an entry in CTFd using the details from `info.yaml`. To ensure everything works correctly, check if this pipeline succeeds.  
+- You can monitor the workflow run on the **Actions** page—look for a job named **"Challenge Update"**, which corresponds to the last commit message in your PR:  ![](./docs/images/successful_chall_update.png)
+  ![](./docs/images/chall_update_pipeline.png)
+- If the pipeline fails, review the error messages provided in the workflow logs. These messages are detailed and will help you troubleshoot any issues.
 
 6. **After playtesting and finalizing your challenge in our dev CTFd environment, create a new PR to promote to the `prod` branch.**  
    - Repeat steps 1-3, then merge your PR to the `prod` branch.  
