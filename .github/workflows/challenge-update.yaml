@@ -55,7 +55,7 @@ jobs:
       - name: Spin up or update docker-compose 
         run: |
           # Clean up old docker compose
-          gcloud compute ssh umassctf25@$vm_name --zone=${{ vars.ZONE }} --command="(cd /home/umassctf25/challenges/${{ env.challenge }} && (docker compose down; cd .. && rm -rf ./${{ env.challenge }})) || true"         
+          gcloud compute ssh umassctf25@$vm_name --zone=${{ vars.ZONE }} --command="(cd /home/umassctf25/challenges/${{ env.challenge }} && (sudo docker compose down; cd .. && rm -rf ./${{ env.challenge }})) || true"         
           
           gcloud compute scp --zone=${{ vars.ZONE }} --recurse challenges/${{ github.head_ref }} umassctf25@$vm_name:/home/umassctf25/challenges/${{ env.challenge }}
 
