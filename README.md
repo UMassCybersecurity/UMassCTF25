@@ -122,7 +122,7 @@ Our **CTFd** instances and all challenges are hosted on **GCP**. The diagram bel
      - If the challenge includes **static downloadable assets** (e.g., images, source code files), create a `static` subdirectory to store them.  
      - If the challenge requires **running services** (e.g., a website, interactive script), include a `docker-compose.yaml` file.
        - <details>
-         <summary>Need a separate instance for each connection?</summary>
+         <summary>Need a **separate instance** for each connection?</summary>
          
          If your service should **start a fresh instance per user connection** (e.g., for binary exploitation or sandboxed environments), use `ynetd` in your `Dockerfile`.  
          `ynetd` ensures each connection gets its own isolated process without reusing state from previous users.
@@ -137,7 +137,7 @@ Our **CTFd** instances and all challenges are hosted on **GCP**. The diagram bel
          ```
          </details>
        - <details>
-         <summary>Running multiple services?</summary>
+         <summary>Running **multiple services?**</summary>
          
          If your challenge requires **multiple services** (e.g., a database, chat bot, API, etc.), you can define them in your `docker-compose.yaml` file.  
          This allows you to specify how different containers interact with each other.
@@ -167,7 +167,7 @@ Our **CTFd** instances and all challenges are hosted on **GCP**. The diagram bel
          - `bot` is a chatbot that depends on the database.
          
         </details>
-        - <details>  <summary><strong>Choosing a Public Port for your services </strong></summary>
+      - <details>  <summary>To choosing a **public port** for your services: </summary>
         To expose a port publicly in a Docker Compose file, use the `ports` directive in the service definition.
 
         ```yaml
@@ -183,40 +183,12 @@ Our **CTFd** instances and all challenges are hosted on **GCP**. The diagram bel
         - **Crypto**: `40000-41000`
         - **Web**: `50000-51000`
         - **Other**: `60000-61000`
-
+        <br>
         Assign **unique ports**:
         All challenges must use a unique port within their category's assigned range. To prevent conflicts: 
         - Update the port-tracker file: Add your challenge’s assigned port to `docs/port-tracker`.
         - Ensure that no other challenge is already using the same port.
         </details>
-
-**Choosing a Public Port**
-
-To expose a port publicly in a Docker Compose file, use the ports directive in the service definition.
-```
-# Example 
-
-services:
-  myapp:
-    image: myapp:latest
-    ports:
-      - "8080:80" # This maps port 80 inside the container to port 8080 on the host, making it accessible publicly.
-```
-
-Each category has a pre-defined port range.
-
-Pwn: 30000-31000
-Crypto: 40000-41000
-Web: 50000-51000
-Other: 60000-61000
-
-
- All challenges must have unique ports in their category's port-range. To prevent race conditions, update your challenge's port in the port-tracker file: `docs/port-tracker` and make sure other challenges don't have the same one.   
-
-
-Exposing ports: 
-
-
 
 ### 🎉 Deploying Challenges
 
