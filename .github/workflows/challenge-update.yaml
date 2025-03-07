@@ -29,17 +29,17 @@ jobs:
         id: gcp-auth
         uses: google-github-actions/auth@v2
         with:
-          workload_identity_provider: ${{ vars.workload_identity_provider_name }}
-          project_id: ${{ vars.project_id }}
+          workload_identity_provider: ${{ vars.WORKLOAD_IDENTITY_PROVIDER_NAME }}
+          project_id: ${{ vars.PROJECT_ID }}  
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
       # For docker-compose
-      - name: Update Dockercompose
+      - name: Update docker-compose 
         run: |-
-          gcloud compute scp --zone=${{ vars.ZONE }} --recurse challenges/${{ github.head_ref }} umassctf25@${{ vars.mixed_challs }}:/home/umassctf25/challenges/${{ env.challenge }}
+          gcloud compute scp --zone=${{ vars.ZONE }} --recurse challenges/${{ github.head_ref }} umassctf25@${{ vars.MIXED_CHALLS_VM_NAME }}:/home/umassctf25/challenges/${{ env.challenge }}
       - name: Upload Static Files
         if: steps.check_static.outputs.files_exists == 'true'
         uses: google-github-actions/upload-cloud-storage@v2
         with:
           path: 'challenges/${{ github.head_ref }}/static'
-          destination: '${{ vars.static_assets_bucket_name }}/${{ github.head_ref }}'
+          destination: '${{ vars.STATIC_ASSETS_BUCKET_NAME }}/${{ github.head_ref }}'
