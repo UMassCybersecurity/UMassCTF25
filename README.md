@@ -100,7 +100,7 @@ Our **CTFd** instances and all challenges are hosted on **GCP**. The diagram bel
 
 ## 🚀 Quickstart - *for challenge authors* 
 
-> **Important:** We have three example challenges under `/challenges/examples/` —please use them as a reference!
+> **Important:** We have three example challenges under `/challenges/examples/`  — please use them as a reference!
 ### 💻 Writing Challenges
 
 > [!IMPORTANT]
