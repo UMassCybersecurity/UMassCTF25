@@ -122,7 +122,7 @@ Our **CTFd** instances and all challenges are hosted on **GCP**. The diagram bel
      - If the challenge includes **static downloadable assets** (e.g., images, source code files), create a `static` subdirectory to store them.  
      - If the challenge requires **running services** (e.g., a website, interactive script), include a `docker-compose.yaml` file.
        - <details>
-         <summary>Need a **separate instance** for each connection?</summary>
+         <summary>Need a separate instance for each connection?</summary>
          
          If your service should **start a fresh instance per user connection** (e.g., for binary exploitation or sandboxed environments), use `ynetd` in your `Dockerfile`.  
          `ynetd` ensures each connection gets its own isolated process without reusing state from previous users.
@@ -137,9 +137,9 @@ Our **CTFd** instances and all challenges are hosted on **GCP**. The diagram bel
          ```
          </details>
        - <details>
-         <summary>Running **multiple services?**</summary>
+         <summary>Running multiple services?</summary>
          
-         If your challenge requires **multiple services** (e.g., a database, chat bot, API, etc.), you can define them in your `docker-compose.yaml` file.  
+         If your challenge requires multiple services (e.g., a database, chat bot, API, etc.), you can define them in your `docker-compose.yaml` file.  
          This allows you to specify how different containers interact with each other.
          
          ```yaml
@@ -167,7 +167,7 @@ Our **CTFd** instances and all challenges are hosted on **GCP**. The diagram bel
          - `bot` is a chatbot that depends on the database.
          
         </details>
-      - <details>  <summary>To choosing a **public port** for your services: </summary>
+       - <details>  <summary>To choosing a public port for your services: </summary>
         To expose a port publicly in a Docker Compose file, use the `ports` directive in the service definition.
 
         ```yaml
