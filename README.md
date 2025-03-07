@@ -17,7 +17,7 @@
 - [🚩 What is UMassCTFd?](#-what-is-umassctfd)
   - [📖 Overview](#-overview)
   - [🏗️ Architecture](#️-architecture)
-- [🚀 Quickstart *for challenge authors*](#-quickstart-for-challenge-authors)
+- [🚀 Quickstart - *for challenge authors*](#-quickstart---for-challenge-authors)
   - [💻 Writing Challenges](#-writing-challenges)
   - [🎉 Deploying Challenges](#-deploying-challenges)
   - [🎮 Playtesting Challenges](#-playtesting-challenges)
@@ -90,7 +90,7 @@ Both CTFd and all challenges are hosted on GCP. The diagram below gives a high-l
 
 <br>
 
-## 🚀 Quickstart *for challenge authors* 
+## 🚀 Quickstart - *for challenge authors* 
 
 ### 💻 Writing Challenges
 
