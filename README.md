@@ -127,8 +127,9 @@ Our **CTFd** instances and all challenges are hosted on **GCP**. The diagram bel
          If your service should **start a fresh instance per user connection** (e.g., for binary exploitation or sandboxed environments), use `ynetd` in your `Dockerfile`.  
          `ynetd` ensures each connection gets its own isolated process without reusing state from previous users.
          
-         Example:
          ```dockerfile
+         # Example
+
          FROM debian:latest
          RUN apt update && apt install -y ynetd
          COPY challenge_binary /challenge
@@ -141,8 +142,9 @@ Our **CTFd** instances and all challenges are hosted on **GCP**. The diagram bel
          If your challenge requires **multiple services** (e.g., a database, chat bot, API, etc.), you can define them in your `docker-compose.yaml` file.  
          This allows you to specify how different containers interact with each other.
          
-         Example:
          ```yaml
+          # Example 
+
          version: "3"
          services:
            web:
@@ -168,7 +170,6 @@ Our **CTFd** instances and all challenges are hosted on **GCP**. The diagram bel
 
 
 **Choosing a Public Port**
-
 
 
 - Use base image of alpine wnv possible (ex-alpine) # link video of how to make docker images smaller (provide the tips and tricks here?) -> checklist dropdown?  
