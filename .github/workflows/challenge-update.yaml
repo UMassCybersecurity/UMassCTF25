@@ -53,13 +53,14 @@ jobs:
           echo "vm_name=$vm_name" >> $GITHUB_ENV
       # For docker-compose
       - name: Spin up or update docker-compose 
+        if: steps.check_dockercompose.outputs.files_exists == 'true'
         run: |
           # Clean up old docker compose
-          gcloud compute ssh umassctf25@$vm_name --zone=${{ vars.ZONE }} --command="(cd /home/umassctf25/challenges/${{ env.challenge }} && (docker compose down; cd .. && rm -rf ./${{ env.challenge }})) || true"         
+          gcloud compute ssh umassctf25@$vm_name --zone=${{ vars.ZONE }} --command="(cd /home/umassctf25/challenges/${{ env.challenge }} && (sudo docker compose down; cd .. && rm -rf ./${{ env.challenge }})) || true"         
           
           gcloud compute scp --zone=${{ vars.ZONE }} --recurse challenges/${{ github.head_ref }} umassctf25@$vm_name:/home/umassctf25/challenges/${{ env.challenge }}
 
-          gcloud compute ssh umassctf25@$vm_name --zone=${{ vars.ZONE }} --command="cd /home/umassctf25/challenges/${{ env.challenge }} && docker compose up --build -d"
+          gcloud compute ssh umassctf25@$vm_name --zone=${{ vars.ZONE }} --command="cd /home/umassctf25/challenges/${{ env.challenge }} && sudo docker compose up --build -d"
       # Upload static files 
       - name: Upload Static Files
         if: steps.check_static.outputs.files_exists == 'true'
@@ -68,7 +69,7 @@ jobs:
           path: 'challenges/${{ github.head_ref }}/static'
           destination: '${{ vars.STATIC_ASSETS_BUCKET_NAME }}/${{ github.head_ref }}'
       # Upload to CTFd (currently commented out)
-      # - name: Update CTFd
-      #   run: |
-      #     ctfd_url="${{ vars.CTFD_URL }}"
-      #     ./scripts/ctf-uploader "challenges" "defaults.yaml" $ctfd_url "${{ secrets.ctfd_token }}" "${{ vars.static_assets_bucket_name }}"
+      - name: Update CTFd
+        run: |
+          ctfd_url="${{ vars.CTFD_URL }}"
+          ./scripts/ctf-uploader "challenges" "defaults.yaml" $ctfd_url "${{ secrets.CTFD_TOKEN }}" "${{ vars.STATIC_ASSETS_BUCKET_NAME }}"

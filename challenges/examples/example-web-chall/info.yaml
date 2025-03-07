@@ -1,3 +1,12 @@
-description: "Example Web Chall" 
+description: "This is just an example!" 
 flags: 
-  - content: "flag{hello}"
+  - content: "UMASS{example-web!3}"
+name: "Example Web"
+value: 100
+
+tags: 
+  - example 
+
+connection_info: nc 34.139.68.169 60001
+
+state: visible

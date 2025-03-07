@@ -1,0 +1,13 @@
+description: "This is just an example!" 
+flags: 
+  - content: "UMASS{example-pwn-or-crypto!92}"
+
+name: "Example Pwn Or Crypto"
+value: 100
+
+tags: 
+  - example 
+
+connection_info: nc 34.139.68.169 60000
+
+state: visible

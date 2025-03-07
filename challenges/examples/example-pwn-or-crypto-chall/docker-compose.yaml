@@ -1,0 +1,6 @@
+version: "3.8"
+services:
+  challenge:
+    build: .
+    ports:
+      - "60000:4444"
