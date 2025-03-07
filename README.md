@@ -27,10 +27,10 @@
     - [✅ Playtesting Assignments](#-playtesting-assignments)
   - [✏️ Editing Challenges](#️-editing-challenges)
 - [🛠️  Installation \& Deployment - *for infra team*](#️--installation--deployment---for-infra-team)
-  - [1. Provision Cloud or On-Prem Services](#1-provision-cloud-or-on-prem-services)
-  - [2. Set up CTFd](#2-set-up-ctfd)
-  - [3. Configure Github Repo \&  Actions](#3-configure-github-repo---actions)
-- ["umassctf25-dev-static-assets"](#umassctf25-dev-static-assets)
+  - [1️⃣ Provision Cloud or On-Prem Services](#1️⃣-provision-cloud-or-on-prem-services)
+  - [2️⃣ Set Up CTFd](#2️⃣-set-up-ctfd)
+  - [3️⃣ Clone \& Configure UMassCTFd Repository \& CI/CD](#3️⃣-clone--configure-umassctfd-repository--cicd)
+- [🎨 Customizing UMassCTFd](#-customizing-umassctfd)
 
 Extending UMassCTFd
 ---
@@ -253,231 +253,18 @@ The dev CTFd environment is where we can **test, iterate on challenges, and make
 <br>
   
 ## 🛠️  Installation & Deployment - *for infra team*
+> 🚧 **This documentation is under construction!** 🚧  
+> Some sections may be incomplete or subject to change.
 
-### 1. Provision Cloud or On-Prem Services 
-Challenges can be deployed on virtual machines hosted on a cloud platform or on-prem servers.  
-
-<details>
-  <summary><h4>GCP</h4></summary>
-
-**1. Create a GCP project**  
-```sh
-# TODO: replace ${PROJECT_NAME} with your GCP project name 
-
-gcloud projects create PROJECT_ID --name="${PROJECT_NAME}"
-```
-
-**2. Authenticate with the GCP CLI**  
-```sh
-gcloud auth login
-```
-**3. Set GCP CLI project config**  
-```sh
-# TODO: replace ${PROJECT_ID} with your GCP project ID 
-
-gcloud config set project ${PROJECT_ID}
-```
-
-**4. Create a VM for each challenge category**  
-```sh
-# TODO: replace ${CATEGORY_1} ${CATEGORY_2} ... ${CATEGORY_N} with your challenge categories; replace ${ZONE} and ${MACHINE_TYPE} with your GCP zone and Compute Engine machine type respectively 
-
-for category in ${CATEGORY_1} ${CATEGORY_2} ${CATEGORY_N}; do
-  gcloud compute instances create "${category}-challs" --zone=${ZONE} --machine-type=${MACHINE_TYPE}
-done
-
-# Example: 
-# for category in web pwn misc; do
-#   gcloud compute instances create "${category}-challs" --zone=us-east1-b --machine-type=e2-medium
-# done
-```
-
-**5. Expose ports** #TODO 
-add tags w/ above creation command 
-
-they have to be network tags
-
-```sh
+<p align="center" style="background-color: yellow; padding: 10px; border-radius: 5px;">
+🚧 <b>This documentation is under construction!</b> 🚧 <br>
+Some sections may be incomplete or subject to change.
+</p>
 
 
-Pwn: 30000-31000
-Crypto: 40000-41000
-Web: 50000-51000
-Other: 60000-61000
-
-gcloud compute instances add-tags pwn-crypto-challs --tags=pwn --zone=us-east1-b
-gcloud compute instances add-tags pwn-crypto-challs --tags=crypto --zone=us-east1-b
-gcloud compute instances add-tags mixed-challs --tags=other --zone-us-east1-b
-gcloud compute instances add-tags web-challs --tags=web --zone-us-east1-b
+### 1️⃣ Provision Cloud or On-Prem Services 
+### 2️⃣ Set Up CTFd 
+### 3️⃣ Clone & Configure UMassCTFd Repository & CI/CD
 
 
-gcloud compute firewall-rules create allow-pwn-port-range \
-    --network=default \
-    --allow=tcp:30000-31000 \
-    --source-ranges=0.0.0.0/0 \
-    --target-tags=pwn \
-    --direction=INGRESS
-
-gcloud compute firewall-rules create allow-crypto-port-range \
-    --network=default \
-    --allow=tcp:40000-41000 \
-    --source-ranges=0.0.0.0/0 \
-    --target-tags=crypto \
-    --direction=INGRESS
-
-gcloud compute firewall-rules create allow-web-port-range \
-    --network=default \
-    --allow=tcp:50000-51000 \
-    --source-ranges=0.0.0.0/0 \
-    --target-tags=web \
-    --direction=INGRESS
-
-gcloud compute firewall-rules create allow-other-port-range \
-    --network=default \
-    --allow=tcp:60000-61000 \
-    --source-ranges=0.0.0.0/0 \
-    --target-tags=other \
-    --direction=INGRESS
-```
-
-
-
-
-**6. Create Public Storage Bucket**
-
-*6a. Create the bucket* 
-```
-gsutil mb -b on -l us-east1 gs://umassctf25-dev-static-assets/
-```
-
-*6b. Make it publically accessible*
-```
-gsutil iam ch allUsers:objectViewer gs://umassctf25-dev-static-assets/
-```
-
-**7. Authenticate to GCP via Workload Identity Federation**
-
-#TODO: check this over
-This [repo](https://github.com/google-github-actions/auth) has detailed documentation about Github Action authentication to GCP.
-
-> Woarkload Identity Federation is used to establish a trust delgation relationship between Github Actions workflow invocation and GCP permissions without storing service account keys.
-> - Workload Identity Pool: "container" for external identities, groups multiple identity providers (ex. Github) and allows them to assume GCP IAM roles; the Workload Identity Pool will have direct IAM permissions on GCP resources.
-> - Workload Identity Provider: specific OIDC identity source (ex. Github) within a Workload Identity Pool 
-
-*6a. Create a Workload Identity Pool*
-```sh 
-# TODO: replace ${PROJECT_ID} with your value below.
-
-gcloud iam workload-identity-pools create "github" \
-  --project="${PROJECT_ID}" \
-  --location="global" \
-  --display-name="GitHub Actions Pool"
-```
-
-*6b. Get full ID of Workload Identity Pool* 
-```sh
-# TODO: replace ${PROJECT_ID} with your value below.
-
-gcloud iam workload-identity-pools describe "github" \
-  --project="${PROJECT_ID}" \
-  --location="global" \
-  --format="value(name)"
-
-# value should be of format `projects/123456789/locations/global/workloadIdentityPools/github`
-```
-
-*6c. Create a Workload Identity Provider in the pool*
-```
-# TODO: replace ${PROJECT_ID} and ${GITHUB_ORG} with your values below.
-
-gcloud iam workload-identity-pools providers create-oidc "my-repo" \
-  --project="${PROJECT_ID}" \
-  --location="global" \
-  --workload-identity-pool="github" \
-  --display-name="My GitHub repo Provider" \
-  --attribute-mapping="google.subject=assertion.sub,attribute.actor=assertion.actor,attribute.repository=assertion.repository,attribute.repository_owner=assertion.repository_owner" \
-  --attribute-condition="assertion.repository_owner == '${GITHUB_ORG}'" \
-  --issuer-uri="https://token.actions.githubusercontent.com"
-
-# Example: 
-# gcloud iam workload-identity-pools providers create-oidc "umassctf25" \
-#  --location="global" \
-#  --workload-identity-pool="github" \
-#  --display-name="UMassCTF25 Github Repo" \
-#  --attribute-mapping="google.subject=assertion.sub,attribute.actor=assertion.actor,attribute.repository=assertion.repository,attribute.repository_owner=assertion.repository_owner" \
-#  --attribute-condition="assertion.repository_owner == 'UMassCybersecurity'" \
-#  --issuer-uri="https://token.actions.githubusercontent.com"
-```
-
-*6e. Allow authentications from Workload Identity Pool to GCP Compute Engine and Storage Bucket resources*
-```
-# For Compute Engine 
-gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
-  --member="principalSet://iam.googleapis.com/${WORKLOAD_IDENTITY_POOL_ID}/attribute.repository/${REPO}" \
-  --role="roles/compute.instanceAdmin.v1"
-
-# For Cloud Storage 
-gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
-  --member="principalSet://iam.googleapis.com/${WORKLOAD_IDENTITY_POOL_ID}/attribute.repository/${REPO}" \
-  --role="roles/storage.admin"
-
-# Example 
-# For Compute Engine 
-gcloud projects add-iam-policy-binding "umassctf25-dev" \
-  --member="principalSet://iam.googleapis.com/projects/75881137583/locations/global/workloadIdentityPools/github/attribute.repository/UMassCTF25" \
-  --role="roles/compute.instanceAdmin.v1"
-
-# For Cloud Storage 
-gcloud projects add-iam-policy-binding "umassctf25-dev" \
-  --member="principalSet://iam.googleapis.com/projects/75881137583/locations/global/workloadIdentityPools/github/attribute.repository/UMassCTF25" \
-  --role="roles/storage.admin"
-
-gcloud projects add-iam-policy-binding "umassctf25-dev" \
-  --member="principalSet://iam.googleapis.com/projects/75881137583/locations/global/workloadIdentityPools/github/attribute.repository/UmassCybersecurity/UMassCTF25" \
-  --role="roles/storage.objectAdmin"
-
-```
-
-- also grant the role `iam.serviceAccountUser` to your principle on the default compute engine service account 
-
-</details>
-
-<details>
-  <summary><h4>Proxmox</h4></summary>
-  This is the hidden content that appears when you click the summary.
-</details>
-
-### 2. Set up CTFd
-
-#TODO This article is fucked so just include commands manually lowkey, also create script 
-
-Follow this https://dev.to/roeeyn/how-to-setup-your-ctfd-platform-with-https-and-ssl-3fda article to set up CTFd. It can be hosted on one of the challenge VMs or a seperate VM depending on anticipated traffic.   
-
-Expose HTTP/HTTPs traffic on the VM hosting CTFd. 
-
-### 3. Configure Github Repo &  Actions 
-
-1) Add `WORKLOAD_IDENTITY_PROVIDER_NAME` repo variable; to get value, run 
-```
-gcloud iam workload-identity-pools providers describe "umassctf25" \
-  --location="global" \
-  --workload-identity-pool="github" \
-  --format="value(name)"
-
-expected format: projects/75881137583/locations/global/workloadIdentityPools/github/providers/umassctf25
-```
-
-2) Add `PROJECT_ID` repo variable; to get value #TODO
-
-3) Add "WEB_CHALLS_VM_NAME" "PWN_CRYPTO_CHALLS_VM_NAME" "MIXED_CHALLS_VM_NAME" 
-"web-challs"
-"mixed-challs"
-"pwn-crypto-challs"
-
-4) Add `ZONE`
-6) Add `STATIC_ASSETS_BUCKET_NAME`
-"umassctf25-dev-static-assets"
----
-7) Add `CTFD_URL`
-
-
+## 🎨 Customizing UMassCTFd 
