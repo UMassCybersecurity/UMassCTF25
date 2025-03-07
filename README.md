@@ -228,26 +228,12 @@ The dev CTFd environment is where we can **test, iterate on challenges, and make
 1. Navigate to: **`34.139.68.169`**  
 2. **Create an account** in the dev CTFd environment using the registration code below:  
 
-   <style>
-   .reveal-text {
-       background-color: #333; /* Dark gray */
-       color: #333; /* Hidden text */
-       padding: 2px 4px;
-       border-radius: 3px;
-       cursor: pointer;
-       transition: color 0.3s ease-in-out;
-   }
-   .reveal-text:hover, .reveal-text:active {
-       color: white; /* Reveal text */
-   }
-   </style>
-
-   Registration Code: <span class="reveal-text">D3v0psCluB_1s_Bett3r_C0de!6969</span>
+   Registration Code: `D3v0psCluB_1s_Bett3r_C0de!6969`
 
 3. **Admin Credentials** (for infra/admin team and CTF leads):  
 
    Username: `admin`  
-   Password: <span class="reveal-text">D3v0psCluB_1s_Bett3r!</span>
+   Password: `D3v0psCluB_1s_Bett3r!`
 
 
 #### ✅ Playtesting Assignments  
