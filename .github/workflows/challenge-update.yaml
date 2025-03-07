@@ -59,7 +59,7 @@ jobs:
           
           gcloud compute scp --zone=${{ vars.ZONE }} --recurse challenges/${{ github.head_ref }} umassctf25@$vm_name:/home/umassctf25/challenges/${{ env.challenge }}
 
-          gcloud compute ssh umassctf25@$vm_name --zone=${{ vars.ZONE }} --command="cd /home/umassctf25/challenges/${{ env.challenge }} && docker compose up --build -d"
+          gcloud compute ssh umassctf25@$vm_name --zone=${{ vars.ZONE }} --command="cd /home/umassctf25/challenges/${{ env.challenge }} && sudo docker compose up --build -d"
       # Upload static files 
       - name: Upload Static Files
         if: steps.check_static.outputs.files_exists == 'true'
