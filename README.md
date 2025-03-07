@@ -332,10 +332,13 @@ gcloud projects add-iam-policy-binding "umassctf25-dev" \
   --role="roles/storage.admin"
 
 gcloud projects add-iam-policy-binding "umassctf25-dev" \
-  --member="principalSet://iam.googleapis.com/projects/75881137583/locations/global/workloadIdentityPools/github/attribute.repository/UMassCTF25" \
+  --member="principalSet://iam.googleapis.com/projects/75881137583/locations/global/workloadIdentityPools/github/attribute.repository/UmassCybersecurity/UMassCTF25" \
   --role="roles/storage.objectAdmin"
 
 ```
+
+- also grant the role `iam.serviceAccountUser` to your principle on the default compute engine service account 
+
 </details>
 
 # TEST COMPUTE FIRST to see if the permissions are getting carried over, scp? 
