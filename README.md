@@ -67,14 +67,14 @@ The default challenge categories are:
 
 To add a new category, you can just create a new subdirectory under `/challenges`.
 
-**Challenge Contents**  
+**Challenge Contents:**  
 We support automated challenge deployments with:
 - Static assets (e.g., downloadable files)
 - Running services (e.g., websites, APIs, network services)
   Both or neither
 - More advanced setups, including multi-container deployments (e.g., databases, message queues, or custom infrastructure)
 
-**Environments**   
+**Environments:**   
 We maintain two environments: **dev** and **prod**, each linked to a corresponding GitHub branch.  Following GitOps best practices 🤓, all challenges should be tested in dev before being promoted to prod.
 
 > [!NOTE]  
@@ -116,8 +116,9 @@ Our **CTFd** instances and all challenges are hosted on **GCP**. The diagram bel
 
 3. **Each challenge directory must include the following files:**  
    - **Required:**  
-     - `info.yaml`: Contains the challenge metadata (used for CTFd entry).  #TODO: link reference.yaml #TODO: explain what this file is, explain more detail  
-   - **Optional (depending on challenge type):**  
+     - `info.yaml`: Contains the challenge metadata (used for CTFd entry).  #TODO: link reference.yaml #TODO: explain what this file is, explain more detail 
+   - **Optional (depending on challenge type):** 
+     - `solve.py`: an automated script that replicates the steps required to solve a challenge, including sending requests, performing exploits, or processing data to retrieve the flag.  
      - If the challenge includes **static downloadable assets** (e.g., images, source code files), create a `static` subdirectory to store them.  
      - If the challenge requires **running services** (e.g., a website, interactive script), include a `docker-compose.yaml` file.
        - <details>
