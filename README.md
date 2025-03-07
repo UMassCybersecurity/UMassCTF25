@@ -251,6 +251,12 @@ Our **CTFd** instances and all challenges are hosted on **GCP**. The diagram bel
        <details>
          <summary>To choosing a public port for your services:</summary>
          
+         Each category has a predefined public port range:
+         - **Pwn**: `30000-31000`
+         - **Crypto**: `40000-41000`
+         - **Web**: `50000-51000`
+         - **Other**: `60000-61000`   
+         
          To expose a port publicly in a Docker Compose file, use the `ports` directive in the service definition.
          
          ```yaml
@@ -262,13 +268,7 @@ Our **CTFd** instances and all challenges are hosted on **GCP**. The diagram bel
                - "8080:80" # Maps port 80 inside the container to port 8080 on the host, making it accessible publicly.
          ```
          
-         Each category has a predefined port range:
-         - **Pwn**: `30000-31000`
-         - **Crypto**: `40000-41000`
-         - **Web**: `50000-51000`
-         - **Other**: `60000-61000`  <br> 
          **Assign unique ports:** 
-
          All challenges must use a unique port within their category's assigned range. To prevent conflicts:
          - Update the port-tracker file by adding your challenge’s assigned port to `docs/port-tracker`.
          - Ensure that no other challenge is already using the same port.
