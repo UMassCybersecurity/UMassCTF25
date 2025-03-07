@@ -1,3 +1,14 @@
-description: "example" 
+description: "This is just an example!" 
 flags: 
-  - content: "flag{lkalskjdfljdajsdf}"
+  - content: "UMASS{example-forensics!57}"
+
+name: "Example Forensics"
+value: 100
+
+hints: 
+  - content: "Open the image!"
+
+tags: 
+  - example 
+
+state: visible
