@@ -405,6 +405,11 @@ expected format: projects/75881137583/locations/global/workloadIdentityPools/git
 - there are some stuff that should be variables in the gh actions
 - get rid of old gh pipeline workflow, document how pipeline workflow works 
 - get rid of ./examples/test
+<<<<<<< Updated upstream
 - do i need region env variable?
 - why is it failing with "updating project metadata?"  
 - do i need region env variable?  
+=======
+- do i need region env variable?  
+- have docs for both pipelines
+>>>>>>> Stashed changes
