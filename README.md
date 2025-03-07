@@ -167,19 +167,54 @@ Our **CTFd** instances and all challenges are hosted on **GCP**. The diagram bel
          - `bot` is a chatbot that depends on the database.
          
         </details>
+        - <details>  <summary><strong>Choosing a Public Port for your services </strong></summary>
+        To expose a port publicly in a Docker Compose file, use the `ports` directive in the service definition.
 
+        ```yaml
+        # Example 
+        services:
+        myapp:
+        image: myapp:latest
+        ports:
+          - "8080:80" # Maps port 80 inside the container to port 8080 on the host, making it accessible publicly.
+        ```
+        Each category has a predefined port range:
+        - **Pwn**: `30000-31000`
+        - **Crypto**: `40000-41000`
+        - **Web**: `50000-51000`
+        - **Other**: `60000-61000`
+
+        Assign **unique ports**:
+        All challenges must use a unique port within their category's assigned range. To prevent conflicts: 
+        - Update the port-tracker file: Add your challenge’s assigned port to `docs/port-tracker`.
+        - Ensure that no other challenge is already using the same port.
+        </details>
 
 **Choosing a Public Port**
 
+To expose a port publicly in a Docker Compose file, use the ports directive in the service definition.
+```
+# Example 
 
-- Use base image of alpine wnv possible (ex-alpine) # link video of how to make docker images smaller (provide the tips and tricks here?) -> checklist dropdown?  
+services:
+  myapp:
+    image: myapp:latest
+    ports:
+      - "8080:80" # This maps port 80 inside the container to port 8080 on the host, making it accessible publicly.
+```
 
-Exposing ports: 
+Each category has a pre-defined port range.
 
 Pwn: 30000-31000
 Crypto: 40000-41000
 Web: 50000-51000
 Other: 60000-61000
+
+
+ All challenges must have unique ports in their category's port-range. To prevent race conditions, update your challenge's port in the port-tracker file: `docs/port-tracker` and make sure other challenges don't have the same one.   
+
+
+Exposing ports: 
 
 
 
