@@ -26,3 +26,5 @@
 
 | Challenge Name | Assigned Port |
 | -------------- | ------------- |
+| `example-pwn-or-crypto-chall` | `60000`|
+| `example-web-chall` | `60001` |
