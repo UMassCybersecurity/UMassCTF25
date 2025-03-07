@@ -82,7 +82,7 @@ This repo is the *SINGLE SOURCE OF TRUTH*. Every challenge's information on CTFd
 
 Both CTFd and all challenges are hosted on GCP. The diagram below gives a high-level overview of how our infrastructure works:  
 
-<img src="diagram.png" alt="Diagram" style="width: 50%;">
+<img src="diagram.png" alt="Diagram" style="width: 75%;">
 
 ## 🚀 Quickstart 
 
