@@ -36,6 +36,7 @@ UMassCTFd is an automated challenge + CTFd deployer used to provision and manage
 
 **What is CTFd?**
 
+CTFd is an open-source Capture The Flag (CTF) platform used for hosting cybersecurity competitions, training platforms, etc. It provides a customizable interface and API for managing challenges, teams, scoring, and event logistics.
 
 ###  📖 Overview
 
@@ -66,25 +67,32 @@ The default challenge categories are:
 
 To add a new category, you can just create a new subdirectory under `/challenges`.
 
-**Challenge Contents:**  
-We support automated deployment of challenges with static assets, interactive Docker containers, both or neither, and even more complicated setups (via Docker Compose)!  
+**Challenge Contents**  
+We support automated challenge deployments with:
+- Static assets (e.g., downloadable files)
+- Running services (e.g., websites, APIs, network services)
+  Both or neither
+- More advanced setups, including multi-container deployments (e.g., databases, message queues, or custom infrastructure)
 
-**Environments:**  
-We have a "dev" and "prod" environment, each with an associated Github branch.  
-As per best GitOps practices 🤓, you should play test your challenge in the dev environment first before promoting it to prod.   
+**Environments**   
+We maintain two environments: **dev** and **prod**, each linked to a corresponding GitHub branch.  Following GitOps best practices 🤓, all challenges should be tested in dev before being promoted to prod.
 
 > [!NOTE]  
-> Our prod environment will not be set up until ~1 week before the CTF to reduce infrastructure costs.
+> The prod environment will only be set up **~1 week before** the CTF to minimize infrastructure costs.
 
-###  🏗️ Architecture
-
-This repo is the *SINGLE SOURCE OF TRUTH*. Every challenge's information on CTFd (ex. description, points, etc.) & source code will live here. 
+### 🏗️ Architecture
+This repository serves as the **single source of truth** for all challenges.  
+It contains both:
+- Challenge metadata (e.g., descriptions, points, etc.)
+- Source code
 
 > [!WARNING]  
-> Making manual changes in CTFd *WILL* get overriden by our CI/CD pipelines. Deploying and updating challenges should only be done through this repo. 
-> We plan to add support for updating/syncing challenge information in CTFd as well in the near future.  
+> **Manual changes in CTFd will be overwritten** by our CI/CD pipelines.  
+> All deployments and updates must be done through this repo!  
+> (We plan to add support for editing challenge data in CTFd directly soon!)
 
-Both CTFd and all challenges are hosted on GCP. The diagram below gives a high-level overview of how our infrastructure works:  
+Our **CTFd** instances and all challenges are hosted on **GCP**. The diagram below provides a high-level overview of our infrastructure:
+
 
 <img src="diagram.png" alt="Diagram" style="width: 75%;">
 
