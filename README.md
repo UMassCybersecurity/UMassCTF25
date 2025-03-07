@@ -9,24 +9,31 @@
     <a href="https://ctf.umasscybersec.org/"> 🚩 UMass CTF 2025 </a> 
   </h3>
   <h3 align="center">
-    🕠 April 18th 2 PM - 20th 8 PM 
+    🕠 April 18th, 2:00 PM EST - April 20, 8:00 PM EST 
   </h3>
 </p>
 
 ---
-* [🚩 What is UMassCTFd?](#-UMassCtfd)
-    + [📖 Overview](#-overview)
-    + [🏗️ Architecture](#-architecture)
-* [🚀 Quickstart - *for challenge authors*](#-quickstart)
-    + [💻 Writing Challenges](#-writing-challs)
-    + [🎉 Deploying Challenges](#-deploying-challs)
-    + [ 🎮 Playtesting Challenges](#-deploying-challs)
-    + [✏️ Editing Challenges](#-editing-challs)
-* [🛠️  Installation & Deployment - *for infra team*](#-deploy)
-    + [1️⃣ Provision Cloud or On-Prem Services](#-provision)
-    + [2️⃣  Setup CTFd](#-setup-ctfd)
-    + [ 3️⃣ Configure Github Repo & Actions](#-github-repo)
-* Custom Configuration
+- [Extending UMassCTFd](#extending-umassctfd)
+- [🚩 What is UMassCTFd?](#-what-is-umassctfd)
+  - [📖 Overview](#-overview)
+  - [🏗️ Architecture](#️-architecture)
+- [🚀 Quickstart *for challenge authors*](#-quickstart-for-challenge-authors)
+  - [💻 Writing Challenges](#-writing-challenges)
+  - [🎉 Deploying Challenges](#-deploying-challenges)
+  - [🎮 Playtesting Challenges](#-playtesting-challenges)
+  - [🎮 Playtesting Challenges](#-playtesting-challenges-1)
+    - [Dev CTFd Environment](#dev-ctfd-environment)
+    - [🔗 Accessing Your Deployed Challenge](#-accessing-your-deployed-challenge)
+    - [✅ Playtesting Assignments](#-playtesting-assignments)
+  - [✏️ Editing Challenges](#️-editing-challenges)
+- [🛠️  Installation \& Deployment - *for infra team*](#️--installation--deployment---for-infra-team)
+  - [1. Provision Cloud or On-Prem Services](#1-provision-cloud-or-on-prem-services)
+  - [2. Set up CTFd](#2-set-up-ctfd)
+  - [3. Configure Github Repo \&  Actions](#3-configure-github-repo---actions)
+- ["umassctf25-dev-static-assets"](#umassctf25-dev-static-assets)
+
+Extending UMassCTFd
 ---
 
 ## 🚩 What is UMassCTFd?  
@@ -87,6 +94,8 @@ Both CTFd and all challenges are hosted on GCP. The diagram below gives a high-l
 
 <img src="diagram.png" alt="Diagram" style="width: 75%;">
 
+<br>
+
 ## 🚀 Quickstart *for challenge authors* 
 
 ### 💻 Writing Challenges
@@ -94,14 +103,16 @@ Both CTFd and all challenges are hosted on GCP. The diagram below gives a high-l
 > [!IMPORTANT]
 > Flag Format: `UMASS{FLAG}`
 
-1. Checkout a new branch for your challenge formatted like: `${CHALLENGE_CATEOGRY}/
+> Ensure your challenge name follows this regex pattern:  
+> `^[A-Za-z][A-Za-z0-9-]*$`
+
+1. **Create a new branch** for your challenge using the format:
+`${CHALLENGE_CATEGORY}/${CHALLENGE_NAME}`
+
 2.  **Create a new directory** for your challenge within the appropriate category directory:  
    `/challenges/${CHALLENGE_CATEGORY}/${CHALLENGE_NAME}`  
 
-   > Ensure your challenge name follows this regex pattern:  
-   > `^[A-Za-z][A-Za-z0-9-]*$`
-
-2. **Each challenge directory must include the following files:**  
+3. **Each challenge directory must include the following files:**  
    - **Required:**  
      - `info.yaml`: Contains the challenge metadata (used for CTFd entry).  #TODO: link reference.yaml #TODO: explain what this file is, explain more detail  
    - **Optional (depending on challenge type):**  
@@ -152,28 +163,6 @@ Both CTFd and all challenges are hosted on GCP. The diagram below gives a high-l
          
         </details>
 
-### 🎉 Deploying Challenges
-
-1. Before deploying your challenge, ensure that all **pre-merge checks** have passed.  
-   - These checks validate that your `info.yaml` file includes **all required fields**. 
-   - You should see a green checkmark on your Pull Request (PR), confirming that the checks have completed successfully, as shown in this image:
-    ![Passing PR Checks](pr-checks.png)
-2. Get a PR approval if you need it. There are two Github teams: `admins` and `authors`. If you are part of the `author` group, you need an approval from a member of the `admin` group before you can merge your PR.
-    - #TODO: insert scnreeshot here of how it will look like needing approval. also make red square of how all checks have passed above? 
-    - `admins`: #TODO: make drop down with the discord handle of admins, then link where you can find user accounts and user groups?  
-3. Merge to dev 
-4. After playtesting, create a new branch to promote to 
-
-
-**Merging**
-#TODO PR reivew (ping someone)? 
-#TODO: also put don't edit main branch and stuff in here 
-
-to dev 
-to prod 
-
-
----
 
 **Choosing a Public Port**
 
@@ -189,21 +178,140 @@ Web: 50000-51000
 Other: 60000-61000
 
 
-for Web: 
 
+### 🎉 Deploying Challenges
 
-for Pwn: 
+1. **Create a Pull Request (PR)** for your branch.  
 
+2. Ensure **all pre-merge checks have passed** before deploying your challenge.
+   - These checks verify that your `info.yaml` file includes **all required fields**.  
+   - You should see a green checkmark on your PR, confirming that the checks have completed successfully:  
 
+    #TODO: put red square 
+     ![Passing PR Checks](pr-checks.png)  
 
+3. **Get approval if required.**  
+   - Our Github organization has two teams: `admins` and `authors`.  
+   - If you're in the `author` group, you **must** get approval from an `admin` before merging your PR.  
+   - If approval is needed, your PR will display a message like this:  
+     
+     ![PR Approval Required](https://via.placeholder.com/600x300?text=Approval+Required)  
 
+   - **Admins List:** Below is a list of admins you can contact for approval. You can also find all user accounts and groups [here](#).  
+
+#TODO: put table with discord handles
+
+     **Admin Contacts (Click to Expand)**  
+     <details>
+       <summary>Admins</summary>
+       - Admin1#1234  
+       - Admin2#5678  
+       - Admin3#9012  
+     </details>
+
+4. **Merge your PR** into the `dev` branch. 
+
+5. **After playtesting and finalizing your challenge in our dev CTFd environment, create a new PR to promote to the `prod` branch.**  
+   - Repeat steps 1-3, then merge your PR to the `prod` branch.  
+
+6. **Delete** your challenge's branch. 
 
 ### 🎮 Playtesting Challenges
-#TODO: put connection info in here 
+
+> [!IMPORTANT]
+> Connecting to our dev environment will required a Wireguard VPN connection. We will set this up in next couple of days and modify the README with connection instructions. 
+
+The dev CTFd environment will be a place where we can iterate on challenges, plan out, and break things before promoting stuff to the production CTFd environment. 
+
+1. Access your deployed challenge at: `34.139.68.169`. 
+To make an account in the dev CTFd environment, you need to create an account with the registration code 
+
+<style>
+.reveal-text {
+    background-color: #333; /* Dark gray */
+    color: #333; /* Hidden text */
+    padding: 2px 4px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+.reveal-text:hover, .reveal-text:active {
+    color: white; /* Reveal text */
+}
+</style>
+
+Registration Code: <span class="reveal-text">D3v0psCluB_1s_Bett3r_C0de!6969</span>
+
+The admin account credentials are: `admin`: <span class="reveal-text">D3v0psCluB_1s_Bett3r!</span>
+
+2. Record status of assigned play testing and complete your playtesting assignments as per this spreadsheet: https://docs.google.com/spreadsheets/d/1qIww51LLm-_pstBHafcTBl6caXEumyQlD3uW41yzdFE/edit?gid=0#gid=0
+
+
+<style>
+.reveal-text {
+    background-color: #333; /* Dark gray */
+    color: #333; /* Hidden text */
+    padding: 2px 4px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+.reveal-text:hover, .reveal-text:active {
+    color: white; /* Reveal text */
+}
+</style>
+
+### 🎮 Playtesting Challenges
+
+> [!IMPORTANT]
+> Connecting to our dev environment **requires a WireGuard VPN connection**. We'll be setting this up in the next few days and updating the README with connection instructions.
+
+#### Dev CTFd Environment  
+The dev CTFd environment is where we can **test, iterate on challenges, and make changes** before promoting them to the production CTFd environment. 
+
+#### 🔗 Accessing Your Deployed Challenge  
+1. Navigate to: **`34.139.68.169`**  
+2. **Create an account** in the dev CTFd environment using the registration code below:  
+
+   <style>
+   .reveal-text {
+       background-color: #333; /* Dark gray */
+       color: #333; /* Hidden text */
+       padding: 2px 4px;
+       border-radius: 3px;
+       cursor: pointer;
+       transition: color 0.3s ease-in-out;
+   }
+   .reveal-text:hover, .reveal-text:active {
+       color: white; /* Reveal text */
+   }
+   </style>
+
+   Registration Code: <span class="reveal-text">D3v0psCluB_1s_Bett3r_C0de!6969</span>
+
+3. **Admin Credentials** (for infra/admin team and CTF leads):  
+
+   Username: `admin`  
+   Password: <span class="reveal-text">D3v0psCluB_1s_Bett3r!</span>
+
+
+#### ✅ Playtesting Assignments  
+- Check the **playtesting spreadsheet** for your assigned tasks:  
+  **[Playtesting Status & Assignments](https://docs.google.com/spreadsheets/d/1qIww51LLm-_pstBHafcTBl6caXEumyQlD3uW41yzdFE/edit?gid=0#gid=0)**
+- Complete your assigned tests and **update the status** accordingly.
+- If anything is unclear or broken, leave comments in the spreadsheet and let the challenge author know.
 
 ### ✏️ Editing Challenges
 
-## 🛠️  Installation & Deployment
+> [!WARNING] 
+> Do **not** edit your challenges directly in the `dev` or `prod` branches, even if you have the necessary permissions. Doing so can cause unintended issues, and your changes may not be properly deployed. **Always make edits through pull requests (PRs)!**
+
+1. Use the branch you originally created to make edits to your challenge.  
+2. Follow the **promotion process steps** again to push your changes.  
+
+<br>
+  
+## 🛠️  Installation & Deployment - *for infra team*
 
 ### 1. Provision Cloud or On-Prem Services 
 Challenges can be deployed on virtual machines hosted on a cloud platform or on-prem servers.  
@@ -393,8 +501,6 @@ gcloud projects add-iam-policy-binding "umassctf25-dev" \
 
 </details>
 
-# TEST COMPUTE FIRST to see if the permissions are getting carried over, scp? 
-
 <details>
   <summary><h4>Proxmox</h4></summary>
   This is the hidden content that appears when you click the summary.
@@ -434,39 +540,3 @@ expected format: projects/75881137583/locations/global/workloadIdentityPools/git
 7) Add `CTFD_URL`
 
 
----
-#TODO:
-- step to install docker on all machines? 
-- squash commits
-- why isnt [!NOTE] working?
-- TODO: fix replacements in the workload identity provider
-- make the workloa didentity provider steps a substep
-- make sure to mention access in terms of merging, who to ping, etc.
-- have the dev environment setup and have IP and password information in this README so people can connect to dev instance
-- create GH team with all users?
-- The instructions need to be rewritten they are lowkey a mess, need to add variables 
-- Create a port tracker file (provide ranges for each category), then expose those ranges : put note that says this will be automatically managed soon 
-- automate DNS? and nginx config figure out
-- setup bastion host for dev environmnet?
-- look into autoscaling for the VMs
-- solve scripts
-- description for ynetd
-- move images to docs folder or smthing
-- clean up branches + random folders in this repo, old PRs
-- there are some stuff that should be variables in the gh actions
-- get rid of old gh pipeline workflow, document how pipeline workflow works 
-- get rid of ./examples/test
-- do i need region env variable?
-- why is it failing with "updating project metadata?"  
-- do i need region env variable?  
-- do i need region env variable?  
-- have docs for both pipelines
-- update About github description 
-- do i need region env variable?  
-- is it failing on other ppls info.yaml being inaccurate too ? 
-- fix example info.yamls
-- check over ynetd example
-- fix all the links
-- include tips for writing a dockerfile, use alpine image, etc.
-- reference/mention example challenges in "how to write challs section"
-- add branch protections? 
