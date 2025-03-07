@@ -1,6 +1,6 @@
 <p align="center">
-  <img src="UMassCybersec.png" width="45%" style="margin-right: 15px;" />
-  <img src="CTFd.png" width="45%" />
+  <img src="./docs/images/UMassCybersec.png" width="45%" style="margin-right: 15px;" />
+  <img src="./docs/images/CTFd.png" width="45%" />
 </p>
 
 ---
@@ -94,7 +94,7 @@ It contains both:
 Our **CTFd** instances and all challenges are hosted on **GCP**. The diagram below provides a high-level overview of our infrastructure:
 
 
-<img src="diagram.png" alt="Diagram" style="width: 75%;">
+<img src="./docs/images/diagram.png" alt="Diagram" style="width: 75%;">
 
 <br>
 
@@ -208,7 +208,7 @@ Our **CTFd** instances and all challenges are hosted on **GCP**. The diagram bel
    - You should see a green checkmark on your PR, confirming that the checks have completed successfully:  
 
     #TODO: put red square 
-     ![Passing PR Checks](pr-checks.png)  
+     ![Passing PR Checks](./docs/images/pr-checks.png)  
 
 3. **Get approval if required.**  
    - Our Github organization has two teams: `admins` and `authors`.  
