@@ -213,7 +213,7 @@ Our **CTFd** instances and all challenges are hosted on **GCP**. The diagram bel
 3. **Get approval if required.**  
    - Permissions are based on your team assignment: `UMassCTF25-Admins` and `UMassCTF25-Challenge-Authors`.  
    - If you're in the `UMassCTF25-Challenge-Authors` group, you **must** get approval from an `UMassCTF25-Admins` before merging your PR.  
-   - You can find the admin list ![here](https://github.com/orgs/UMassCybersecurity/teams/umassctf25-admins).  
+   - You can find the admin list [here](https://github.com/orgs/UMassCybersecurity/teams/umassctf25-admins).  
 
 4. **Merge your PR** into the `dev` branch. 
 
