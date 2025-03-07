@@ -33,6 +33,9 @@
 
 UMassCTFd is an automated challenge + CTFd deployer used to provision and manage UMass Cybersecurity Club's CTFs and internal training platforms. 
 
+**What is CTFd?**
+
+
 ###  📖 Overview
 
 **Challenge Categories:**
@@ -91,7 +94,8 @@ Both CTFd and all challenges are hosted on GCP. The diagram below gives a high-l
 > [!IMPORTANT]
 > Flag Format: `UMASS{FLAG}`
 
-1. **Create a new directory** for your challenge within the appropriate category directory:  
+1. Checkout a new branch for your challenge formatted like: `${CHALLENGE_CATEOGRY}/
+2.  **Create a new directory** for your challenge within the appropriate category directory:  
    `/challenges/${CHALLENGE_CATEGORY}/${CHALLENGE_NAME}`  
 
    > Ensure your challenge name follows this regex pattern:  
@@ -99,7 +103,7 @@ Both CTFd and all challenges are hosted on GCP. The diagram below gives a high-l
 
 2. **Each challenge directory must include the following files:**  
    - **Required:**  
-     - `info.yaml`: Contains the challenge metadata (used for CTFd entry).   
+     - `info.yaml`: Contains the challenge metadata (used for CTFd entry).  #TODO: link reference.yaml #TODO: explain what this file is, explain more detail  
    - **Optional (depending on challenge type):**  
      - If the challenge includes **static downloadable assets** (e.g., images, source code files), create a `static` subdirectory to store them.  
      - If the challenge requires **running services** (e.g., a website, interactive script), include a `docker-compose.yaml` file.
@@ -151,12 +155,15 @@ Both CTFd and all challenges are hosted on GCP. The diagram below gives a high-l
 ### 🎉 Deploying Challenges
 
 1. Before deploying your challenge, ensure that all **pre-merge checks** have passed.  
-   - These checks validate that your `info.yaml` file includes all required fields.  
+   - These checks validate that your `info.yaml` file includes **all required fields**. 
    - You should see a green checkmark on your Pull Request (PR), confirming that the checks have completed successfully, as shown in this image:
     ![Passing PR Checks](pr-checks.png)
+2. Get a PR approval if you need it. There are two Github teams: `admins` and `authors`. If you are part of the `author` group, you need an approval from a member of the `admin` group before you can merge your PR.
+    - #TODO: insert scnreeshot here of how it will look like needing approval. also make red square of how all checks have passed above? 
+    - `admins`: #TODO: make drop down with the discord handle of admins, then link where you can find user accounts and user groups?  
+3. Merge to dev 
+4. After playtesting, create a new branch to promote to 
 
-**End to End Tests**
-#TODO: say what we test, include screenshot of green check mark, include instructions for troubleshooting if they fail 
 
 **Merging**
 #TODO PR reivew (ping someone)? 
@@ -462,3 +469,4 @@ expected format: projects/75881137583/locations/global/workloadIdentityPools/git
 - fix all the links
 - include tips for writing a dockerfile, use alpine image, etc.
 - reference/mention example challenges in "how to write challs section"
+- add branch protections? 
