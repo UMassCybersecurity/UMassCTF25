@@ -82,6 +82,8 @@ This repo is the *SINGLE SOURCE OF TRUTH*. Every challenge's information on CTFd
 
 Both CTFd and all challenges are hosted on GCP. The diagram below gives a high-level overview of how our infrastructure works:  
 
+<img src="diagram.png" alt="Diagram" style="width: 50%;">
+
 ## 🚀 Quickstart 
 
 ### 💻 Writing Challenges
@@ -102,7 +104,7 @@ Both CTFd and all challenges are hosted on GCP. The diagram below gives a high-l
      - If the challenge includes **static downloadable assets** (e.g., images, source code files), create a `static` subdirectory to store them.  
      - If the challenge requires **running services** (e.g., a website, interactive script), include a `docker-compose.yaml` file.
        - <details>
-         <summary>Need a <u>separate instance</u> for each connection?</summary>
+         <summary>Need a separate instance for each connection?</summary>
          
          If your service should **start a fresh instance per user connection** (e.g., for binary exploitation or sandboxed environments), use `ynetd` in your `Dockerfile`.  
          `ynetd` ensures each connection gets its own isolated process without reusing state from previous users.
@@ -116,7 +118,7 @@ Both CTFd and all challenges are hosted on GCP. The diagram below gives a high-l
          ```
          </details>
        - <details>
-         <summary>Running <u>multiple services?</u></summary>
+         <summary>Running multiple services?</summary>
          
          If your challenge requires **multiple services** (e.g., a database, chat bot, API, etc.), you can define them in your `docker-compose.yaml` file.  
          This allows you to specify how different containers interact with each other.
@@ -144,37 +146,14 @@ Both CTFd and all challenges are hosted on GCP. The diagram below gives a high-l
          - `db` is a MySQL database.
          - `bot` is a chatbot that depends on the database.
          
-         You can add more services as needed and configure them accordingly in `docker-compose.yaml`.
         </details>
 ---
-
-**Writing Dockerfiles** 
-
-<details> 
-    <summary> if each user needs a new interactive session: </summary>
-</details>
-
-<details> 
-    <summary> if you need extra services (web): </summary>
-</details>
 
 **Choosing a Public Port**
 
 
 
-#TODO: have the chat reword this
 
-#TODO fix this up, go over info.yaml  
-    Create a new directory in the appropriate category for your challenge.
-        Use the following format (challenges/[category]/[challenge name])
-            Please make sure the challenge name does not contain any underscores, capital letters, or special characters.
-        Each challenge should have the following things at the top level:
-            an optional static folder with downloadable assets
-            a Dockerfile/docker-compose.yaml and a config.env if dynamic (see this config.env for reference)
-            info.yaml (see this info.yaml for reference)
-    Create a PR to merge into the dev branch.
-    Test your challenges in the CTFd dev environment. Create any follow up PRs as necessary to make edits to your challenge.
-    Create a PR to promote your challenge to the prod branch.
 
 
 - Use base image of alpine wnv possible (ex-alpine) # link video of how to make docker images smaller (provide the tips and tricks here?) -> checklist dropdown?  
@@ -478,4 +457,7 @@ expected format: projects/75881137583/locations/global/workloadIdentityPools/git
 - do i need region env variable?  
 - is it failing on other ppls info.yaml being inaccurate too ? 
 - fix example info.yamls
-- check over ynetd example 
+- check over ynetd example
+- fix all the links
+- include tips for writing a dockerfile, use alpine image, etc.
+- reference/mention example challenges in "how to write challs section"
