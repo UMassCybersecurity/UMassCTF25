@@ -92,7 +92,7 @@ Both CTFd and all challenges are hosted on GCP. The diagram below gives a high-l
 1. **Create a new directory** for your challenge within the appropriate category directory:  
    `/challenges/${CHALLENGE_CATEGORY}/${CHALLENGE_NAME}`  
 
-   > **⚠️ Important:** Ensure your challenge name follows this regex pattern:  
+   > Ensure your challenge name follows this regex pattern:  
    > `^[A-Za-z][A-Za-z0-9-]*$`
 
 2. **Each challenge directory must include the following files:**  
@@ -102,6 +102,8 @@ Both CTFd and all challenges are hosted on GCP. The diagram below gives a high-l
      - If the challenge includes **static downloadable assets** (e.g., images, source code files), create a `static` subdirectory to store them.  
      - If the challenge requires **an interactive container for each user**, include a `docker-compose.yaml` file.  
 
+
+---
 
 **Writing Dockerfiles** 
 
