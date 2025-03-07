@@ -7,8 +7,22 @@
 - **Web:** `50000-51000`
 - **Other:** `60000-61000`
 
-## Assigned Ports
+## Assigned Ports (Pwn)
 
-| Challenge Name   | Category | Assigned Port | Notes |
-| ---------------- | -------- | ------------- | ----- |
-| ExampleChallenge | Web      | 50000         |       |
+| Challenge Name | Assigned Port |
+| -------------- | ------------- |
+
+## Assigned Ports (Crypto)
+
+| Challenge Name | Assigned Port |
+| -------------- | ------------- |
+
+## Assigned Ports (Web)
+
+| Challenge Name | Assigned Port |
+| -------------- | ------------- |
+
+## Assigned Ports (Other)
+
+| Challenge Name | Assigned Port |
+| -------------- | ------------- |
