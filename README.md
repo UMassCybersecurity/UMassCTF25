@@ -167,7 +167,7 @@ Our **CTFd** instances and all challenges are hosted on **GCP**. The diagram bel
          - `bot` is a chatbot that depends on the database.
          
         </details>
-       - <details>  <summary>To choosing a public port for your services: </summary>
+       - <details>  <summary>To choose a public port for your services: </summary>
         To expose a port publicly in a Docker Compose file, use the `ports` directive in the service definition.
 
         ```yaml
