@@ -113,83 +113,6 @@ Our **CTFd** instances and all challenges are hosted on **GCP**. The diagram bel
 
 2.  **Create a new directory** for your challenge within the appropriate category directory:  
    `/challenges/${CHALLENGE_CATEGORY}/${CHALLENGE_NAME}`  
-```
-3. **Each challenge directory must include the following files:**  
-   - **Required:**  
-     - `info.yaml`: Contains the challenge metadata (used for CTFd entry).  #TODO: link reference.yaml #TODO: explain what this file is, explain more detail 
-   - **Optional (depending on challenge type):** 
-     - `solve.py`: an automated script that replicates the steps required to solve a challenge, including sending requests, performing exploits, or processing data to retrieve the flag.  
-     - If the challenge includes **static downloadable assets** (e.g., images, source code files), create a `static` subdirectory to store them.  
-     - If the challenge requires **running services** (e.g., a website, interactive script), include a `docker-compose.yaml` file.
-       - <details>
-         <summary>Need a separate instance for each connection?</summary>
-         
-         If your service should **start a fresh instance per user connection** (e.g., for binary exploitation or sandboxed environments), use `ynetd` in your `Dockerfile`.  
-         `ynetd` ensures each connection gets its own isolated process without reusing state from previous users.
-         
-         ```dockerfile
-         # Example
-
-         FROM debian:latest
-         RUN apt update && apt install -y ynetd
-         COPY challenge_binary /challenge
-         CMD ["ynetd", "-p", "1337", "-u", "nobody", "--", "/challenge"]
-         ```
-         </details>
-       - <details>
-         <summary>Running multiple services?</summary>
-         
-         If your challenge requires multiple services (e.g., a database, chat bot, API, etc.), you can define them in your `docker-compose.yaml` file.  
-         This allows you to specify how different containers interact with each other.
-         
-         ```yaml
-          # Example 
-
-         version: "3"
-         services:
-           web:
-             build: ./web
-             ports:
-               - "8080:80"
-           db:
-             image: mysql:latest
-             environment:
-               MYSQL_ROOT_PASSWORD: root
-               MYSQL_DATABASE: challenge_db
-           bot:
-             build: ./bot
-             depends_on:
-               - db
-         ```
-         In this example:
-         - `web` is a service running a website.
-         - `db` is a MySQL database.
-         - `bot` is a chatbot that depends on the database.
-         
-        </details>
-       - <details>  <summary>To choose a public port for your services: </summary>
-        To expose a port publicly in a Docker Compose file, use the `ports` directive in the service definition.
-
-        ```yaml
-        # Example 
-        services:
-        myapp:
-        image: myapp:latest
-        ports:
-          - "8080:80" # Maps port 80 inside the container to port 8080 on the host, making it accessible publicly.
-        ```
-        Each category has a predefined port range:
-        - **Pwn**: `30000-31000`
-        - **Crypto**: `40000-41000`
-        - **Web**: `50000-51000`
-        - **Other**: `60000-61000`
-        <br>
-        Assign **unique ports**:
-        All challenges must use a unique port within their category's assigned range. To prevent conflicts: 
-        - Update the port-tracker file: Add your challenge’s assigned port to `docs/port-tracker`.
-        - Ensure that no other challenge is already using the same port.
-        </details>
-```
 3. **Each challenge directory must include the following files:**
 
    - **Required:**
@@ -249,7 +172,7 @@ Our **CTFd** instances and all challenges are hosted on **GCP**. The diagram bel
        </details>
        
        <details>
-         <summary>To choosing a public port for your services:</summary>
+         <summary>To choose a public port for your services:</summary>
          
          Each category has a predefined public port range:
          - **Pwn**: `30000-31000`
