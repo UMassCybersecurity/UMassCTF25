@@ -219,8 +219,11 @@ Our **CTFd** instances and all challenges are hosted on **GCP**. The diagram bel
 
 5. **Verify the `challenge-update` pipeline passes**  
 - Our "upload" pipeline is responsible for deploying your challenge to the GCP VM and updating or creating an entry in CTFd using the details from `info.yaml`. To ensure everything works correctly, check if this pipeline succeeds.  
-- You can monitor the workflow run on the **Actions** page—look for a job named **"Challenge Update"**, which corresponds to the last commit message in your PR:  ![](./docs/images/successful_chall_update.png)
-  ![](./docs/images/chall_update_pipeline.png)
+- You can monitor the workflow run on the **Actions** page—look for a job named **"Challenge Update"**, which corresponds to the last commit message in your PR:
+<p align="center">
+  <img src="./docs/images/successful_chall_update.png" alt="Successful Challenge Update" width="45%">
+  <img src="./docs/images/chall_update_pipeline.png" alt="Challenge Update Pipeline" width="45%">
+</p>
 - If the pipeline fails, review the error messages provided in the workflow logs. These messages are detailed and will help you troubleshoot any issues.
 
 6. **After playtesting and finalizing your challenge in our dev CTFd environment, create a new PR to promote to the `prod` branch.**  
