@@ -3,7 +3,7 @@ on:
   pull_request:
     types: [closed]
     branches:
-      - dev 
+      - dev
 jobs:
   Update-Challenge:
     runs-on: ubuntu-latest
@@ -15,34 +15,31 @@ jobs:
       # Basic setup
       - uses: actions/checkout@v4.1.7
       - run: |-
-          branch=${{github.head_ref}}
+          branch=${{ github.head_ref }}
           tokens=(${branch//'/'/ })
-          
           echo "category=${tokens[0]}" >> $GITHUB_ENV
           echo "challenge=${tokens[1]}" >> $GITHUB_ENV
       - name: Check for Static Folder
         id: check_static
         uses: andstor/file-existence-action@v3.0.0
         with:
-          files: "challenges/${{ github.head_ref }}/static" 
+          files: "challenges/${{ github.head_ref }}/static"
       # GCP Authentication
       - name: Authenticate with GCP
         id: gcp-auth
-        uses: 'google-github-actions/auth@v2'
+        uses: google-github-actions/auth@v2
         with:
-          # token_format: 'access_token'
-          workload_identity_provider: ${{ vars.workload_identity_provider_name}}
-          project_id:  ${{ vars.project_id }}
-          # service_account: ${{ vars.workload_identity_provider_sa_name }}
-      - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v2'
-      #  For docker-compose
+          workload_identity_provider: ${{ vars.workload_identity_provider_name }}
+          project_id: ${{ vars.project_id }}
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+      # For docker-compose
       - name: Update Dockercompose
-         run: |-
-           gcloud compute scp --zone=${{ vars.ZONE }} --recurse challenges/${{ github.head_ref }} umassctf25@$mixed-challs:/home/umassctf25/challenges/${{ env.challenge }}
+        run: |-
+          gcloud compute scp --zone=${{ vars.ZONE }} --recurse challenges/${{ github.head_ref }} umassctf25@${{ vars.mixed_challs }}:/home/umassctf25/challenges/${{ env.challenge }}
       - name: Upload Static Files
         if: steps.check_static.outputs.files_exists == 'true'
         uses: google-github-actions/upload-cloud-storage@v2
         with:
-          path: 'challenges/${{github.head_ref}}/static'
-          destination: '${{vars.static_assets_bucket_name}}/${{github.head_ref}}'
+          path: 'challenges/${{ github.head_ref }}/static'
+          destination: '${{ vars.static_assets_bucket_name }}/${{ github.head_ref }}'
