@@ -196,6 +196,8 @@ done
 **5. Expose ports** #TODO 
 add tags w/ above creation command 
 
+they have to be network tags
+
 ```sh
 
 
@@ -376,7 +378,6 @@ expected format: projects/75881137583/locations/global/workloadIdentityPools/git
 "pwn-crypto-challs"
 
 4) Add `ZONE`
-5) Add `REGION`
 6) Add `STATIC_ASSETS_BUCKET_NAME`
 "umassctf25-dev-static-assets"
 ---
