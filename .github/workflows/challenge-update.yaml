@@ -14,11 +14,17 @@ jobs:
     steps:
       # Basic setup
       - uses: actions/checkout@v4.1.7
-      - run: |-
+      - run: |
           branch=${{ github.head_ref }}
           tokens=(${branch//'/'/ })
           echo "category=${tokens[0]}" >> $GITHUB_ENV
           echo "challenge=${tokens[1]}" >> $GITHUB_ENV
+      # Check for files
+      - name: Check for docker-compose 
+        id: check_dockercompose
+        uses: andstor/file-existence-action@v3.0.0
+        with:
+          files: "challenges/${{ github.head_ref }}/docker-compose.yaml"
       - name: Check for Static Folder
         id: check_static
         uses: andstor/file-existence-action@v3.0.0
@@ -33,13 +39,36 @@ jobs:
           project_id: ${{ vars.PROJECT_ID }}  
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
+      # Updating Challenge...
+      - name: Select VM
+        if: steps.check_dockercompose.outputs.files_exists == 'true'
+        run: |
+          if [ "${{ env.category }}" == "web" ]; then 
+            vm_name=${{ vars.WEB_CHALLS_VM_NAME }}
+          elif [ "${{ env.category }}" == "pwn" ] || [ "${{ env.category }}" == "crypto" ]; then 
+            vm_name=${{ vars.PWN_CRYPTO_CHALLS_VM_NAME }}
+          else 
+            vm_name=${{ vars.MIXED_CHALLS_VM_NAME }}
+          fi 
+          echo "vm_name=$vm_name" >> $GITHUB_ENV
       # For docker-compose
-      - name: Update docker-compose 
-        run: |-
-          gcloud compute scp --zone=${{ vars.ZONE }} --recurse challenges/${{ github.head_ref }} umassctf25@${{ vars.MIXED_CHALLS_VM_NAME }}:/home/umassctf25/challenges/${{ env.challenge }}
+      - name: Spin up or update docker-compose 
+        run: |
+          # Clean up old docker compose
+          gcloud compute ssh umassctf25@$vm_name --zone=${{ vars.ZONE }} --command="(cd /home/umassctf25/challenges/${{ env.challenge }} && (docker compose down; cd .. && rm -rf ./${{ env.challenge }})) || true"         
+          
+          gcloud compute scp --zone=${{ vars.ZONE }} --recurse challenges/${{ github.head_ref }} umassctf25@$vm_name:/home/umassctf25/challenges/${{ env.challenge }}
+
+          gcloud compute ssh umassctf25@$vm_name --zone=${{ vars.ZONE }} --command="cd /home/umassctf25/challenges/${{ env.challenge }} && docker compose up --build -d"
+      # Upload static files 
       - name: Upload Static Files
         if: steps.check_static.outputs.files_exists == 'true'
         uses: google-github-actions/upload-cloud-storage@v2
         with:
           path: 'challenges/${{ github.head_ref }}/static'
           destination: '${{ vars.STATIC_ASSETS_BUCKET_NAME }}/${{ github.head_ref }}'
+      # Upload to CTFd (currently commented out)
+      # - name: Update CTFd
+      #   run: |
+      #     ctfd_url="${{ vars.CTFD_URL }}"
+      #     ./scripts/ctf-uploader "challenges" "defaults.yaml" $ctfd_url "${{ secrets.ctfd_token }}" "${{ vars.static_assets_bucket_name }}"
