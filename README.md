@@ -265,7 +265,7 @@ The dev CTFd environment is where we can **test, iterate on challenges, and make
 > 🚨 Do **not** edit your challenges directly in the `dev` or `prod` branches, even if you have the necessary permissions. Doing so can cause unintended issues, and your changes may not be properly deployed. **Always make edits through pull requests (PRs)!** 🚨
 
 1. Use the branch you originally created to make edits to your challenge.  
-2. Follow the **promotion process steps** again to push your changes.  
+2. Follow the **deployment steps** again to push your changes.  
 
 <br>
   
