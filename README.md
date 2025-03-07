@@ -242,7 +242,7 @@ Our **CTFd** instances and all challenges are hosted on **GCP**. The diagram bel
 The dev CTFd environment is where we can **test, iterate on challenges, and make changes** before promoting them to the production CTFd environment. 
 
 #### 🔗 Accessing Your Deployed Challenge  
-1. Navigate to: **[`34.139.68.169`](34.139.68.169)**  
+1. Navigate to: **[`34.139.68.169`](http://34.139.68.169)**  
 2. **Create an account** in the dev CTFd environment using the registration code below:  
 
    Registration Code: `D3v0psCluB_1s_Bett3r_C0de!6969`
