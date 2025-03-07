@@ -147,12 +147,27 @@ Both CTFd and all challenges are hosted on GCP. The diagram below gives a high-l
          - `bot` is a chatbot that depends on the database.
          
         </details>
+
+### 🎉 Deploying Challenges
+
+1. Before deploying your challenge, you must validate that the **pre-merge** checks have passed 
+    - the pre-merge checks make sure that your `info.yaml` contains all the required fields
+    - you should see the green check mark on your PR as shown in this image:  
+
+**End to End Tests**
+#TODO: say what we test, include screenshot of green check mark, include instructions for troubleshooting if they fail 
+
+**Merging**
+#TODO PR reivew (ping someone)? 
+#TODO: also put don't edit main branch and stuff in here 
+
+to dev 
+to prod 
+
+
 ---
 
 **Choosing a Public Port**
-
-
-
 
 
 
@@ -166,8 +181,6 @@ Web: 50000-51000
 Other: 60000-61000
 
 
-
-
 for Web: 
 
 
@@ -176,19 +189,6 @@ for Pwn:
 
 
 
-### 🎉 Deploying Challenges
-
-**End to End Tests**
-Before deploying your challenge, you must validate that the automatic end to end(E2E) tests have passed. 
-#TODO: say what we test, include screenshot of green check mark, include instructions for troubleshooting if they fail 
-
-**Merging**
-#TODO PR reivew (ping someone)? 
-#TODO: also put don't edit main branch and stuff in here 
-
-
-to dev 
-to prod 
 
 ### 🎮 Playtesting Challenges
 #TODO: put connection info in here 
