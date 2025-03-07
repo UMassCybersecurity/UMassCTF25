@@ -193,7 +193,7 @@ Our **CTFd** instances and all challenges are hosted on **GCP**. The diagram bel
          
          **Assign unique ports:** 
          All challenges must use a unique port within their category's assigned range. To prevent conflicts:
-         - Update the port-tracker file by adding your challenge’s assigned port to `docs/port-tracker`.
+         - Update the port-tracker file by adding your challenge’s assigned port to `docs/port-tracker.md`.
          - Ensure that no other challenge is already using the same port.
        </details>
 
