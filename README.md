@@ -100,53 +100,52 @@ Both CTFd and all challenges are hosted on GCP. The diagram below gives a high-l
      - `info.yaml`: Contains the challenge metadata (used for CTFd entry).   
    - **Optional (depending on challenge type):**  
      - If the challenge includes **static downloadable assets** (e.g., images, source code files), create a `static` subdirectory to store them.  
-     - If the challenge requires **running services** (e.g, a website, interactive script), include a `docker-compose.yaml` file.  
-     <details>
-       <summary>Need a separate instance for each connection?</summary>
-
-       If your service should **start a fresh instance per user connection** (e.g., for binary exploitation or sandboxed environments), use `ynetd` in your `Dockerfile`.  
-       `ynetd` ensures each connection gets its own isolated process without reusing state from previous users.
-
-       Example:
-       ```dockerfile
-       FROM debian:latest
-       RUN apt update && apt install -y ynetd
-       COPY challenge_binary /challenge
-       CMD ["ynetd", "-p", "1337", "-u", "nobody", "--", "/challenge"]
-       ```
-       </details>
-    <details> 
-         <summary>Running multiple services?</summary>
-
-       If your challenge requires **multiple services** (e.g., a database, chat bot, API, etc.), you can define them in your `docker-compose.yaml` file.  
-       This allows you to specify how different containers interact with each other.
-
-       Example:
-       ```yaml
-       version: "3"
-       services:
-         web:
-           build: ./web
-           ports:
-             - "8080:80"
-         db:
-           image: mysql:latest
-           environment:
-             MYSQL_ROOT_PASSWORD: root
-             MYSQL_DATABASE: challenge_db
-         bot:
-           build: ./bot
-           depends_on:
-             - db
-       ```
-       In this example:
-       - `web` is a service running a website.
-       - `db` is a MySQL database.
-       - `bot` is a chatbot that depends on the database.
-
-       You can add more services as needed and configure them accordingly in `docker-compose.yaml`.
-       </details> 
-    </details>
+     - If the challenge requires **running services** (e.g., a website, interactive script), include a `docker-compose.yaml` file.
+       - <details>
+         <summary>Need a <u>separate instance</u> for each connection?</summary>
+         
+         If your service should **start a fresh instance per user connection** (e.g., for binary exploitation or sandboxed environments), use `ynetd` in your `Dockerfile`.  
+         `ynetd` ensures each connection gets its own isolated process without reusing state from previous users.
+         
+         Example:
+         ```dockerfile
+         FROM debian:latest
+         RUN apt update && apt install -y ynetd
+         COPY challenge_binary /challenge
+         CMD ["ynetd", "-p", "1337", "-u", "nobody", "--", "/challenge"]
+         ```
+         </details>
+       - <details>
+         <summary>Running <u>multiple services?</u></summary>
+         
+         If your challenge requires **multiple services** (e.g., a database, chat bot, API, etc.), you can define them in your `docker-compose.yaml` file.  
+         This allows you to specify how different containers interact with each other.
+         
+         Example:
+         ```yaml
+         version: "3"
+         services:
+           web:
+             build: ./web
+             ports:
+               - "8080:80"
+           db:
+             image: mysql:latest
+             environment:
+               MYSQL_ROOT_PASSWORD: root
+               MYSQL_DATABASE: challenge_db
+           bot:
+             build: ./bot
+             depends_on:
+               - db
+         ```
+         In this example:
+         - `web` is a service running a website.
+         - `db` is a MySQL database.
+         - `bot` is a chatbot that depends on the database.
+         
+         You can add more services as needed and configure them accordingly in `docker-compose.yaml`.
+        </details>
 ---
 
 **Writing Dockerfiles** 
