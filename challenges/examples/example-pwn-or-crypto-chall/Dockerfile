@@ -1,4 +1,5 @@
-FROM ubuntu:19.10
+FROM ubuntu
+RUN apt update && apt install -y g++ 
 
 RUN echo "root:root07896789340275098236489127" | chpasswd
 
@@ -7,9 +8,9 @@ WORKDIR /home/ctf
 RUN useradd -d /home/ctf/ ctf
 RUN echo "ctf:ctf4353254387438958902" | chpasswd
 
-COPY ./main .
+COPY ./static/main.cpp .
+RUN g++ -o main main.cpp -static -std=c++17
 COPY ynetd .
-COPY flag.txt .
 
 RUN chmod 755 main
 RUN chmod 755 ynetd
