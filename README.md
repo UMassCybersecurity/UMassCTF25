@@ -14,7 +14,6 @@
 </p>
 
 ---
-- [Extending UMassCTFd](#extending-umassctfd)
 - [🚩 What is UMassCTFd?](#-what-is-umassctfd)
   - [📖 Overview](#-overview)
   - [🏗️ Architecture](#️-architecture)
@@ -27,12 +26,8 @@
     - [✅ Playtesting Assignments](#-playtesting-assignments)
   - [✏️ Editing Challenges](#️-editing-challenges)
 - [🛠️  Installation \& Deployment - *for infra team*](#️--installation--deployment---for-infra-team)
-  - [1️⃣ Provision Cloud or On-Prem Services](#1️⃣-provision-cloud-or-on-prem-services)
-  - [2️⃣ Set Up CTFd](#2️⃣-set-up-ctfd)
-  - [3️⃣ Clone \& Configure UMassCTFd Repository \& CI/CD](#3️⃣-clone--configure-umassctfd-repository--cicd)
-- [🎨 Customizing UMassCTFd](#-customizing-umassctfd)
+- [🎨 Extending UMassCTFd](#-extending-umassctfd)
 
-Extending UMassCTFd
 ---
 
 ## 🚩 What is UMassCTFd?  
@@ -253,18 +248,9 @@ The dev CTFd environment is where we can **test, iterate on challenges, and make
 <br>
   
 ## 🛠️  Installation & Deployment - *for infra team*
-> 🚧 **This documentation is under construction!** 🚧  
-> Some sections may be incomplete or subject to change.
-
-<p align="center" style="background-color: yellow; padding: 10px; border-radius: 5px;">
-🚧 <b>This documentation is under construction!</b> 🚧 <br>
-Some sections may be incomplete or subject to change.
-</p>
+> 🚧 **This documentation is still under construction!** 🚧  
 
 
-### 1️⃣ Provision Cloud or On-Prem Services 
-### 2️⃣ Set Up CTFd 
-### 3️⃣ Clone & Configure UMassCTFd Repository & CI/CD
+## 🎨 Extending UMassCTFd
 
-
-## 🎨 Customizing UMassCTFd 
+> 🚧 **This documentation is still under construction!** 🚧  
