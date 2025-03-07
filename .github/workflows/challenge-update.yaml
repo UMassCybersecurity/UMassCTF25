@@ -54,12 +54,12 @@ jobs:
       #     vm_name=${{ vars.MIXEDCHALLSVM }}
       #     echo "vm_name=$vm_name" >> $GITHUB_ENV
       # # For docker-compose
-      # - name: Update Dockercompose
+       - name: Update Dockercompose
       #   if: steps.check_dockercompose.outputs.files_exists == 'true'
-      #   run: |-
-      #     # Clean up old docker compose
+         run: |-
+           # Clean up old docker compose
       #     gcloud compute ssh umasscybersec@$vm_name --zone=${{ vars.ZONE }} --command="(cd /home/umasscybersec/challenges/${{ env.challenge }} && (docker compose down; cd .. && rm -rf ./${{ env.challenge }})) || true"         
-      #     gcloud compute scp --zone=${{ vars.ZONE }} --recurse challenges/${{ github.head_ref }} umasscybersec@$vm_name:/home/umasscybersec/challenges/${{ env.challenge }}
+           gcloud compute scp --zone=${{ vars.ZONE }} --recurse challenges/${{ github.head_ref }} umassctf25@$mixed-challs:/home/umassctf25/challenges/${{ env.challenge }}
       #     gcloud compute ssh umasscybersec@$vm_name --zone=${{ vars.ZONE }} --command="cd /home/umasscybersec/challenges/${{ env.challenge }} && docker compose up --build -d"       
       # # For docker
       # - name: Docker Auth
