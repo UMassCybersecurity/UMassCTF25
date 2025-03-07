@@ -118,7 +118,7 @@ Our **CTFd** instances and all challenges are hosted on **GCP**. The diagram bel
 
    - **Required:**
     - `info.yaml`: Stores the challenge metadata used for the CTFd entry, including details like the challenge's display name, point value, flags, etc.    
-    This file is directly used to create or update your challenge in CTFd.  For complete documentation on structuring this file, refer to `docs/info.yaml` and `docs/full-info.yaml`.  
+    This file is directly used to create or update your challenge in CTFd.  For complete documentation on structuring this file, **refer to `docs/info.yaml`** and `docs/full-info.yaml`.  
 
    - **Optional (depending on challenge type):**
      - `solve.py`: An automated script that replicates the steps required to solve a challenge, including sending requests, performing exploits, or processing data to retrieve the flag.
