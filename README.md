@@ -84,7 +84,7 @@ Both CTFd and all challenges are hosted on GCP. The diagram below gives a high-l
 
 <img src="diagram.png" alt="Diagram" style="width: 75%;">
 
-## 🚀 Quickstart - *for challenge authors* 
+## 🚀 Quickstart *for challenge authors* 
 
 ### 💻 Writing Challenges
 
@@ -153,7 +153,7 @@ Both CTFd and all challenges are hosted on GCP. The diagram below gives a high-l
 1. Before deploying your challenge, ensure that all **pre-merge checks** have passed.  
    - These checks validate that your `info.yaml` file includes all required fields.  
    - You should see a green checkmark on your Pull Request (PR), confirming that the checks have completed successfully, as shown in this image:
-
+    ![Passing PR Checks](pr-checks.png)
 
 **End to End Tests**
 #TODO: say what we test, include screenshot of green check mark, include instructions for troubleshooting if they fail 
