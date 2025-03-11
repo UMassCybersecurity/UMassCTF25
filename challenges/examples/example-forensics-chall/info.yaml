@@ -3,7 +3,7 @@ flags:
   - content: "UMASS{example-forensics!57}"
 
 name: "Example Forensics"
-value: 100
+value: 50
 
 hints: 
   - content: "Open the image!"
