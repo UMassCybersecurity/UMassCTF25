@@ -10,7 +10,7 @@ jobs:
       - name: Build Docker Compose
         run: |
           # docker compose and ensure valid output
-          output="$(docker compose build --dry-run 2>&1)"
+          output="$(docker compose build challenges/${{ github.head_ref }}/ --dry-run 2>&1)"
           if [ $? != 0 ] && [ "${output}" != "no configuration file provided: not found" ] ; then
               echo "$output"
               exit 1
