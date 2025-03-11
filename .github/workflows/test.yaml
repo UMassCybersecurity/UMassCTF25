@@ -1,0 +1,9 @@
+name: Test
+on:
+  workflow_dispatch:
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          docker compose version
