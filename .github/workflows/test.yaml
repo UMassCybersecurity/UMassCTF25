@@ -6,4 +6,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          docker compose version
+          output="$(docker compose build challenges/${{ github.head_ref }}/ --dry-run 2>&1)"
+          echo $output
