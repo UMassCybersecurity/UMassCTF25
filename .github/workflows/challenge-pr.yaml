@@ -3,13 +3,16 @@ on:
   pull_request:
     types: [opened, edited, synchronize, reopened]
 jobs:
-  test-pr:
+  validate-pr:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4.1.7
+      - uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: docker-compose-plugin
+      - uses: actions/checkout@v4.2.2
       - name: Build Docker Compose
         run: |
-          # docker compose and ensure valid output
+          # build docker compose and ensure valid output
           output="$(docker compose build challenges/${{ github.head_ref }}/ --dry-run 2>&1)"
           if [ $? != 0 ] && [ "${output}" != "no configuration file provided: not found" ] ; then
               echo "$output"
