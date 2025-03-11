@@ -53,6 +53,7 @@ jobs:
           echo "vm_name=$vm_name" >> $GITHUB_ENV
       # For docker-compose
       - name: Spin up or update docker-compose 
+        if: steps.check_dockercompose.outputs.files_exists == 'true'
         run: |
           # Clean up old docker compose
           gcloud compute ssh umassctf25@$vm_name --zone=${{ vars.ZONE }} --command="(cd /home/umassctf25/challenges/${{ env.challenge }} && (sudo docker compose down; cd .. && rm -rf ./${{ env.challenge }})) || true"         

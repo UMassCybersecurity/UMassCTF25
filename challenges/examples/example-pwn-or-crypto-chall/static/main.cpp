@@ -1,18 +1,20 @@
-# include <iostream> 
+#include <iostream>
 
-using namespace std; 
+using namespace std;
 
-int main() { 
-  int input = 0; 
-  cout << "Enter a number (1 to get flag): "; 
-  cin >> input; 
+int main() {
+    int input = 0;
 
-  if (input == 1) {
-    cout << "UMASS{example-pwn-or-crypto!92}";
-  } else { 
-    cout << "Wrong number :(";
-  }
+    cout << "Enter a number (1 to get flag): " << flush;
 
-  return 0; 
+    while (cin >> input) { // Keep reading input
+        if (input == 1) {
+            cout << "UMASS{example-pwn-or-crypto!92}" << endl;
+            break; // Exit after correct input
+        } else {
+            cout << "Wrong number :( Try again: " << flush;
+        }
+    }
+
+    return 0;
 }
-
