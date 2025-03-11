@@ -6,10 +6,13 @@ jobs:
   validate-pr:
     runs-on: ubuntu-latest
     steps:
-      - uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          packages: docker-compose-plugin
+      - name: Cache
+        uses: actions/cache@v3.4.3
       - uses: actions/checkout@v4.2.2
+      - name: Install Docker Compose
+        run: |
+          sudo apt update
+          sudo apt install -y docker-compose-plugin
       - name: Build Docker Compose
         run: |
           # build docker compose and ensure valid output
