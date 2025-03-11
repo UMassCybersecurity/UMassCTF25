@@ -1,3 +1,4 @@
 description: "example" 
 flags: 
   - content: "flag{lkalskjdfljdajsdf}"
+initial: 50
