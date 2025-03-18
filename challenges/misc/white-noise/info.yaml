@@ -1,0 +1,14 @@
+description: "I was told I can reconstruct images using white noise, but when training my model I seem to have deleted one or two of my training images..." 
+flags: 
+  - content: "UMASS{d03snt-s33m-v3ry-m1n1m@x}"
+
+name: "White Noise"
+value: 100
+
+hints: 
+  - content: "Do you think my training set is big enough for my dimension?"
+
+tags: 
+  - ml
+
+state: hidden
